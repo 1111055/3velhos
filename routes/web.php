@@ -79,6 +79,7 @@ Route::post('role', 'RoleController@store');
 //jogo
 Route::post('jogo', 'JogoController@store');
 Route::post('jogo/closebet',                          ['as' => 'jogo.closebet',    'uses' => 'JogoController@closebet']); 
+Route::post('jogo/newgame',                          ['as' => 'jogo.newgame',    'uses' => 'JogoController@newgame']); 
 
 //Aposta                    
 Route::post('aposta', 'ApostaController@store')->name('aposta');

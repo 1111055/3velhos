@@ -66,7 +66,8 @@
                               <span class="label label-warning"> {{ $item->_aposta }} </span>
                             @endif
                             </td>
-                               @if($item->_aposta == '0')
+                               <?php  print_r($item->_aposta);?> 
+                               @if($item->resultado == '0')
                                    <td  class="col-xs-1 text-center"> <span class="label label-danger"> S/ Resultado </span></td>
                                @else
                                    <td  class="col-xs-1 text-center"> <span class="label label-success"> {{ $item->resultado }} </span></td>
@@ -126,20 +127,21 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div> 
-      <form>
+      <form name="formsend" method="POST" action="{{route('jogo.newgame')}}">
         <div class="modal-body">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
        
               <div class="form-group">
                 <label for="exampleInputEmail1">Equipa Casa</label>
-                <input type="text" class="form-control" id="eq1"  >
+                <input type="text" class="form-control" id="eq1" name="eq1" >
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Equipa Fora</label>
-                <input type="text" class="form-control" id="eq2" >
+                <input type="text" class="form-control" id="eq2" name="eq2" >
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Data</label>
-                <input type="date" class="form-control" id="data_encontro">
+                <input type="date" class="form-control" id="data_encontro" name="data_encontro">
               </div>
             
         </div>

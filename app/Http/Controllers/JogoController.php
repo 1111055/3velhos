@@ -111,6 +111,18 @@ class JogoController extends Controller
          }
 
          $bet->save();
-        // return response()->json(0);
+         return response()->json(0);
+    }
+
+    public function newgame(Request $request)
+    {
+         Jogo::create([
+            'eq1'           => request()->eq1,
+            'eq2'           => request()->eq2,
+            'data_encontro' => request()->data_encontro,
+            'situacao'      => 0,
+            'resultado'     => 0,
+        ]);
+         return response()->json(0);
     }
 }
