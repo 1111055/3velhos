@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ asset('backend/bower_components/Ionicons/css/ionicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/dist/css/AdminLTE.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/dist/css/skins/skin-blue.css') }}">
+  <link rel="stylesheet" href="{{ asset('backend/plugins/timepicker/bootstrap-timepicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">

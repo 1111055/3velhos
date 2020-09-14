@@ -8,7 +8,7 @@
             @include('backend.navbar')
 			      @include('backend.sidebar')
 
-              @yield('content')
+                  @yield('content')
 
 	
 		       	@include('backend.footer')
@@ -24,9 +24,9 @@
 
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ asset('backend/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <!-- jQuery UI 1.11.4 -->
+
     <script src="{{ asset('backend/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
-    
+     <script src="{{ asset('backend/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
   
     <script src="{{ asset('js/multiselect2.js') }}"></script>
 
@@ -72,6 +72,52 @@ $('.fechar').on('click', function(){
   $('#resultadotmp').modal('toggle');
 
 });
+
+    //Timepicker
+    $('.timepicker').timepicker({
+      showInputs: false
+    })
+
+    $('#op0').on('click', function(){
+
+  
+        $('#op0').prop('checked', true);
+        $('#op1').prop('checked', false);
+        $('#op2').prop('checked', false);
+        $('#op3').prop('checked', false);
+    });
+
+    $('#op1').on('click', function(){
+
+  
+        $('#op0').prop('checked', false);
+        $('#op1').prop('checked', true);
+        $('#op2').prop('checked', false);
+        $('#op3').prop('checked', false);
+    });
+
+
+
+    $('#op2').on('click', function(){
+
+  
+        $('#op0').prop('checked', false);
+        $('#op1').prop('checked', false);
+        $('#op2').prop('checked', true);
+        $('#op3').prop('checked', false);
+    });
+
+
+
+    $('#op3').on('click', function(){
+
+        $('#op0').prop('checked', false);
+        $('#op1').prop('checked', false);
+        $('#op2').prop('checked', false);
+        $('#op3').prop('checked', true);
+    });
+
+
 
 
 

@@ -20,7 +20,7 @@ class DashController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
    
@@ -35,7 +35,35 @@ class DashController extends Controller
 
                  $userId = Auth::id();
 
+        $ck2 = 0; $ck3 = 0;$ck1 = 0;$ck0 = 0;
 
+        if(!$request->op1 && !$request->op2 && !$request->op3 && !$request->op0){
+             $jogo =  $jogo->where('situacao','=','0');
+             $ck1 = 1; 
+        }else{
+            if($request->op0){
+                $ck2 = 0; $ck3 = 0;$ck1 = 0;$ck0 = 1;
+            }
+
+            if($request->op1){
+                dump("0");
+                $jogo = $jogo->where('situacao','=','0');
+                $ck2 = 0; $ck3 = 0;$ck1 = 1;$ck0 = 0;
+            }
+
+            if($request->op2){
+                dump("1");
+                $jogo = $jogo->where('situacao','=','1');
+                $ck2 = 1; $ck3 = 0;$ck1 = 0;$ck0 = 0;
+            }
+
+            if($request->op3){
+                 dump("5");
+                 $jogo = $jogo->where('cancelado','=','1');
+                 $ck2 = 0; $ck3 = 1;$ck1 = 0;$ck0 = 0;
+            }
+        }
+      //  dump($jogo);
 
         foreach ($jogo as $key => $value) {
 
@@ -50,11 +78,13 @@ class DashController extends Controller
             }
                    
          }    
+         // dd($jogo);
 
         $user->authorizeRoles(['master', 'supermaster']);
 
+       
 
-        return view('backend.index', compact('class','userId','jogo'));
+        return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0'));
     }
 
     /**

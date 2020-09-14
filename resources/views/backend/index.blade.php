@@ -4,8 +4,6 @@
 
 
 
-</script>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -23,9 +21,49 @@
             <div class="panel-body">
                           <!-- /.box-body -->
             <div class="box-footer clearfix">
-              <button type="button" class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#exampleModal">
-                    Inserir Novo Jogo
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#exampleModal">
+                        Inserir Novo Jogo
                     </button>
+                </div>
+                <div class="col-xs-12">
+                    <form action="{{route('home')}}" method="GET">
+
+                                          <!-- radio -->
+                          <div class="form-group">
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" value="1" id="op0" @if($ck0==1) checked="TRUE" @endif name="op0">
+                                Todos
+                              
+                              </label>
+                            </div>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio"   value="1"  id="op1" @if($ck1==1) checked="TRUE" @endif name="op1">
+                                   Abertos
+                              </label>
+                            </div>
+                            <div class="radio-inline">
+                              <label> 
+                                  <input type="radio"  value="1"  id="op2" @if($ck2==1) checked="TRUE" @endif name="op2">
+                                  Fechados
+                              </label>
+                            </div> 
+                           <div class="radio-inline">
+                              <label>
+                                  <input type="radio" value="1"  id="op3" @if($ck3==1) checked="TRUE" @endif name="op3">
+                                  Cancelados
+                              </label>
+                            </div>
+                          </div>
+
+                      
+                         <div class="form-inline">
+                           <button type="submit" class="btn btn-primary">Filtrar</button>
+                         </div>
+                    </form>
+                </div>
             </div>
             <!-- /.box-footer -->
             </div>
@@ -152,6 +190,19 @@
                 <label for="exampleInputPassword1">Data</label>
                 <input type="date" class="form-control" id="data_encontro" name="data_encontro">
               </div>
+              <!--div class="bootstrap-timepicker">
+                <div class="form-group">
+                  <label>Hora:</label>
+
+                  <div class="input-group">
+                    <input type="text" class="form-control timepicker">
+
+                    <div class="input-group-addon">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                  </div>
+                </div>
+              </div-->
             
         </div>
         <div class="modal-footer">
