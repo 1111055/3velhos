@@ -17,9 +17,22 @@
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         </ol>
       </section>
+
+        <div class="container col-xs-8">
+          <div class="panel panel-default">
+            <div class="panel-body">
+                          <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <button type="button" class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#exampleModal">
+                    Inserir Novo Jogo
+                    </button>
+            </div>
+            <!-- /.box-footer -->
+            </div>
+          </div>
+        </div>
          <div class="col-xs-8">
 
-          <!-- TABLE: LATEST ORDERS -->
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Jogos</h3>
@@ -49,12 +62,13 @@
                             <td>
                                 @if($item->situacao == 1)
                                   <span class="label label-danger">Jogo Fechado</span>
-                                @else
+                                @elseif($item->situacao == 0)
 
                                   <button type="button"  idjogo="{{ $item->id }}" class="btn btn-sm btn-success btn-flat fechar">
                                           Fechar Jogo
                                   </button>
-
+                                @else
+                                      <span class="label label-warning">Cancelado</span>
                                 @endif
                             </td>
                             <td  class="col-xs-1 text-center">
@@ -66,11 +80,12 @@
                               <span class="label label-warning"> {{ $item->_aposta }} </span>
                             @endif
                             </td>
-                               <?php  print_r($item->_aposta);?> 
                                @if($item->resultado == '0')
                                    <td  class="col-xs-1 text-center"> <span class="label label-danger"> S/ Resultado </span></td>
-                               @else
+                               @elseif($item->resultado == '1' || $item->resultado == 'x' || $item->resultado == '2' )
                                    <td  class="col-xs-1 text-center"> <span class="label label-success"> {{ $item->resultado }} </span></td>
+                               @else
+                                   <td  class="col-xs-1 text-center"> <span class="label label-warning"> Cancelado </span></td>
                                @endif
                           </tr>
                     @endforeach
@@ -79,13 +94,7 @@
               </div>
               <!-- /.table-responsive -->
             </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <button type="button" class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#exampleModal">
-                    Inserir Novo Jogo
-                    </button>
-            </div>
-            <!-- /.box-footer -->
+
           </div>
          </div>
         <div class="col-xs-4" style="float: right;">
@@ -209,6 +218,7 @@
                   <option val="1">1</option>
                   <option val="x">x</option>
                   <option val="2">2</option>
+                  <option val="3">Cancelado</option>
                 </select>
               </div>
             

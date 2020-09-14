@@ -94,20 +94,30 @@ class JogoController extends Controller
        
          $bet = Jogo::find($id);
 
-         $bet->situacao = 1;
-         $bet->resultado = $resultado;
+
 
          $exist = Aposta::where('jogo_id', '=', $id)->get();
 
-         foreach ($exist as $key => $value) {
+         if($resultado != 3 && $resultado != "Cancelado"){
 
-            if($value->aposta ==  $resultado){
+             $bet->situacao = 1;
+             $bet->resultado = $resultado;
 
-                $class = Classificacao::where('user_id', '=', $value->user_id)->first();
-                $class->pontos += 1;
-                $class->save();
-            }
+             foreach ($exist as $key => $value) {
 
+                if($value->aposta ==  $resultado){
+
+                    $class = Classificacao::where('user_id', '=', $value->user_id)->first();
+                    $class->pontos += 1;
+                    $class->save();
+                }
+
+             }
+         }else{
+        
+             $bet->situacao = 2;
+             $bet->resultado = 3;
+             $bet->cancelado = 1;
          }
 
          $bet->save();
