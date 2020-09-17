@@ -15,6 +15,8 @@
 
 Route::get('/', 'DashController@index');
 Route::get('home', 'DashController@index')->name('home');
+Route::post('home', 'DashController@index');
+Route::get('home/{data}',                     ['as' => 'home.data',    'uses' => 'DashController@filter']);
 
 //graficos
 Route::get('dash/piechart', 'DashController@piechart')->name('piechart');
