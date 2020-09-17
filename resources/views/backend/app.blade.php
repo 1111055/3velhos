@@ -3,7 +3,7 @@
 @include('backend.head')
 
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" >
 	<div class="wrapper">
             @include('backend.navbar')
 			      @include('backend.sidebar')
@@ -27,7 +27,8 @@
 
     <script src="{{ asset('backend/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
      <script src="{{ asset('backend/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
-  
+
+       <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('js/multiselect2.js') }}"></script>
 
     <script src="{{ asset('backend/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
@@ -36,23 +37,25 @@
 
 <script>
 
-        $("form[name='formsend']").submit(function (e) {
-            e.preventDefault();
+$("form[name='formsend']").submit(function (e) {
+    e.preventDefault();
 
-            var post_url = $(this).attr("action"); //get form action url
-            var request_method = $(this).attr("method"); //get form GET/POST method
-            var form_data = $(this).serialize(); //Encode form elements for submission
+    var post_url = $(this).attr("action"); //get form action url
+    var request_method = $(this).attr("method"); //get form GET/POST method
+    var form_data = $(this).serialize(); //Encode form elements for submission
 
-            $.ajax({
-                url: post_url,
-                type: request_method,
-                data: form_data
-            }).done(function (response) {
-              alert('Guardado com Sucesso!');
-                location.reload();
-            });
+    $.ajax({
+        url: post_url,
+        type: request_method,
+        data: form_data
+    }).done(function (response) {
+      alert('Guardado com Sucesso!');
+        location.reload();
+    });
 
-        });
+});
+
+
 $('.apostar').on('click', function(){
 
   
@@ -119,6 +122,16 @@ $('.fechar').on('click', function(){
 
 
 
-
+if ($(window).width() < 514) {
+    $('#bodyarrow').attr('class', 'container col-xs-12');
+    $('#Classificacaoclass').attr('class', 'container col-xs-12');
+    $('#jogoclass').attr('class', ' container col-xs-12');
+    $('#filterclass').attr('class', 'container col-xs-12');
+} else {
+    $('#bodyarrow').attr('class', 'container col-xs-2');
+    $('#jogoclass').attr('class', 'container col-xs-8');
+    $('#Classificacaoclass').attr('class', 'container col-xs-4');
+    $('#filterclass').attr('class', 'container col-xs-8');
+}
 
 </script>

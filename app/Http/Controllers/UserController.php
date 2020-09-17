@@ -193,7 +193,7 @@ class UserController extends Controller
                         // Canvas image
                         $canvas = Image::canvas(160, 160);
                         $canvas->insert($thumb_img, 'center');
-                        $canvas->save($destinationPath.'/'.$imagename,50);
+                        $canvas->save($destinationPath.'/'.$imagename,100);
                                     
       }
 

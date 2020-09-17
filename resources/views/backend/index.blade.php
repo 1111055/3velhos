@@ -3,9 +3,19 @@
 @section('content')
 
 
+<style type="text/css">
+  
+  @media (max-width: 830px) {
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+</style>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" >
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
@@ -16,7 +26,7 @@
         </ol>
       </section>
 
-        <div class="container col-xs-8">
+        <div class="container col-xs-8" id="filterclass">
           <div class="panel panel-default">
             <div class="panel-body">
                           <!-- /.box-body -->
@@ -26,10 +36,10 @@
                         Inserir Novo Jogo
                     </button>
                 </div>
-                <div class="col-xs-12">
-                    <form action="{{route('home')}}" method="GET">
+                <div class="col-xs-8">
+                    <form action="{{route('home')}}" method="GET" class="form-inline">
 
-                                          <!-- radio -->
+                      <div class="input-group">         <!-- radio -->
                           <div class="form-group">
                             <div class="radio-inline">
                               <label>
@@ -56,20 +66,31 @@
                                   Cancelados
                               </label>
                             </div>
+                              <button type="submit" class="btn btn-primary" >Filtrar</button>
                           </div>
-
-                      
-                         <div class="form-inline">
-                           <button type="submit" class="btn btn-primary">Filtrar</button>
                          </div>
                     </form>
+                </div>
+                <div class="col-xs-2" id="bodyarrow" style="float: right;">
+                  
+                     <div class="input-group">
+
+                       <span class="input-group-btn">
+                            <a href="{{route('home.data',1)}}?" class="btn btn-default " type="button" ><i class="fa fa-arrow-left"></i></a>
+                       </span>
+                       <input type="text" class="form-control text-center" value="{{ $datatmp }}" readonly="true">
+                       <span class="input-group-btn">
+                            <a href="{{route('home.data',2)}}" class="btn btn-default " type="button"><i class="fa fa-arrow-right"></i></a>
+                       </span>
+                     </div>
+          
                 </div>
             </div>
             <!-- /.box-footer -->
             </div>
           </div>
         </div>
-         <div class="col-xs-8">
+         <div class="container col-xs-8" id="jogoclass">
 
           <div class="box box-info">
             <div class="box-header with-border">
@@ -81,18 +102,28 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
+                    <th class="col-xs-1 text-center">Apostar</th>
                     <th class="col-xs-2 text-right">Casa</th>
                     <th class="col-xs-1 text-center">x</th>
                     <th class="col-xs-2">Fora</th>
                     <th>Data</th>
                     <th>Situação</th>
-                    <th class="col-xs-1 text-center">Apostar</th>
+                    
                     <th class="col-xs-1 text-center">Resultado</th>
                   </tr>
                   </thead>
                   <tbody>
                       @foreach( $jogo as $item)
                           <tr>
+                           <td  class="col-xs-1 text-center">
+                              @if($item->_aposta == '0')
+                              <button type="button" idjogo="{{ $item->id }}"  class="btn btn-sm btn-info btn-flat pull-left apostar">
+                                  <i class="fa fa-plus-circle"></i>
+                            </button>
+                            @else
+                              <span class="label label-warning"> {{ $item->_aposta }} </span>
+                            @endif
+                            </td>
                             <td class="col-xs-2  text-right"><span>{{ $item->eq1 }}</span></td>
                             <td class="col-xs-1  text-center">X</td>
                             <td class="col-xs-2"><span>{{ $item->eq2 }}</span></td>
@@ -109,15 +140,7 @@
                                       <span class="label label-warning">Cancelado</span>
                                 @endif
                             </td>
-                            <td  class="col-xs-1 text-center">
-                              @if($item->_aposta == '0')
-                              <button type="button" idjogo="{{ $item->id }}"  class="btn btn-sm btn-info btn-flat pull-left apostar">
-                                  <i class="fa fa-plus-circle"></i>
-                            </button>
-                            @else
-                              <span class="label label-warning"> {{ $item->_aposta }} </span>
-                            @endif
-                            </td>
+
                                @if($item->resultado == '0')
                                    <td  class="col-xs-1 text-center"> <span class="label label-danger"> S/ Resultado </span></td>
                                @elseif($item->resultado == '1' || $item->resultado == 'x' || $item->resultado == '2' )
@@ -135,7 +158,7 @@
 
           </div>
          </div>
-        <div class="col-xs-4" style="float: right;">
+        <div class="container col-xs-4" style="float: right;" id="Classificacaoclass">
             <section>
                         <!-- PRODUCT LIST -->
                   <div class="box box-primary">
@@ -148,8 +171,16 @@
                       @foreach($class as $item)
 
 
-                        <li class="item">
+                        <li class="item"> 
                           <div class="product-info">
+
+                             @if(file_exists(public_path().'/logotipo/User/user_'.$item->utilizador[0]->id.'.jpg'))
+
+                                 <img src="{{ public_path().'/logotipo/User/user_1.jpg' }}" class="img-circle" alt="User Image" style="margin-right: 2%; max-width: 10%;">
+                             @else
+                                 <img src="https://fakeimg.pl/160x160/" class="img-circle" alt="User Image" style="margin-right: 2%;max-width: 10%;">
+                              @endif
+                            
                             <a href="javascript:void(0)" class="product-title">{{$item->utilizador[0]->name }}
                               <span class="label label-success pull-right">{{ $item->pontos }}</span></a>
                           </div>
