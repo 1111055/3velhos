@@ -27,12 +27,31 @@ class DashController extends Controller
         $user = Auth::user();
 
 
+      
         $class = Classificacao::
                  orderBy('pontos','desc')->get();
+        $datasession =  $request->session()->get('datafilter');
 
-        $jogo = Jogo::where('data_encontro', '>=', carbon::now()->startOfDay())->where('data_encontro', '<', carbon::now()->addDays(1)->startOfDay())->
-                 orderBy('data_encontro','desc')->get();
-                 $userId = Auth::id();
+        if(!$datasession){
+
+                $datatmp = carbon::now()->format('M d');;
+                $jogo = Jogo::where('data_encontro', '>=', carbon::now()->startOfDay())->where('data_encontro', '<', carbon::now()->addDays(1)->startOfDay())->
+                orderBy('data_encontro','desc')->get();
+                $request->session()->put('datafilter', Carbon::now());
+                   
+        }else{
+
+                $datatmp = $datasession->format('M d');
+              
+                $antes = $datasession->startOfDay();
+                $depois = $antes->copy()->addDays(1)->startOfDay()->format('y-m-d H:i:s');
+
+                $jogo = Jogo::where('data_encontro', '>=',   $antes->startOfDay()->format('y-m-d H:i:s'))->where('data_encontro', '<', $depois)->
+                       orderBy('data_encontro','desc')->get();
+              
+        }
+
+        $userId = Auth::id();
 
         $ck2 = 0; $ck3 = 0;$ck1 = 0;$ck0 = 0;
  
@@ -67,23 +86,8 @@ class DashController extends Controller
                   $request->session()->put('opfilter', 3);
             }
         }
-      //  dump($jogo);
-
-        $datatmp = "Hoje";
-        $request->session()->put('datafilter', Carbon::now());
 
 
-       /* if($data != null){
-          
-             if($data == 1){
-                $jogo = $jogo->where('data_encontro', '=', Carbon::now()->subDays(1)->toDateTimeString())->get();
-                  $datatmp = "Ontem";
-             }else{
-                  $jogo = $jogo->where('data_encontro', '=', Carbon::now()->addDays(1)->toDateTimeString())->get();
-                  $datatmp = "Amanha";
-             }
-
-        }*/
 
         foreach ($jogo as $key => $value) {
 
@@ -116,12 +120,13 @@ class DashController extends Controller
         //
     }
 
-    public function filter(Request $request, int $data)
+    public function filter(Request $request)
     {
         $user = Auth::user();
    
         $datasession =  $request->session()->get('datafilter');       
         $option =  $request->session()->get('opfilter'); 
+        $data = $request->data;
 
         $class = Classificacao::
                  orderBy('pontos','desc')->get();

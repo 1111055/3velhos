@@ -50,10 +50,119 @@ $("form[name='formsend']").submit(function (e) {
         data: form_data
     }).done(function (response) {
       alert('Guardado com Sucesso!');
-        location.reload();
+   // var url      = window.location.href; 
+      window.location.href=window.location.href;
+    //alert(url);
     });
 
 });
+
+
+$("form[name='formsendgame']").submit(function (e) {
+    e.preventDefault();
+
+    var post_url = $(this).attr("action"); //get form action url
+    var request_method = $(this).attr("method"); //get form GET/POST method
+    var form_data = $(this).serialize(); //Encode form elements for submission
+    var opt =  $('#apostatmp').val();
+    var game = $('#jogo_id').val();
+
+    if(opt != 0){
+        $.ajax({
+            url: post_url,
+            type: request_method,
+            data: form_data
+        }).done(function (response) {
+
+        $('#exampleModalapostar').modal('toggle');
+        $( '#showsucess').text( "!! Guardado Com Sucesso " );
+        $('#showsucess').show();
+
+        setTimeout(function(){ 
+
+                var link = "#".concat(game);
+                $(link).find('.apotar').remove();
+
+               $('#showsucess').text("");
+               $('#showsucess').hide();
+               var text = '<span class="label label-warning">'.concat(opt).concat('</span>');
+                $('#apostatmp').prop('selectedIndex',0);
+
+               $(link).html(text);
+
+         }, 1500);
+            
+         
+        });
+    }else{
+        $('#exampleModalapostar').modal('toggle');
+        $( '#showerror').text( "!! Erro - Compo obrigatório !! " );
+        $('#showerror').show();
+
+        setTimeout(function(){ 
+
+               $('#showerror').text("");
+               $('#showerror').hide();
+               $('#exampleModalapostar').modal('toggle');
+
+         }, 1500);
+    }
+});
+
+
+$("form[name='formsendaposta']").submit(function (e) {
+    e.preventDefault();
+
+    var post_url = $(this).attr("action"); //get form action url
+    var request_method = $(this).attr("method"); //get form GET/POST method
+    var form_data = $(this).serialize(); //Encode form elements for submission
+    var opt =  $('#resultadotp').val();
+    var game = $('#jogoid').val();
+
+    alert(opt);
+
+    if(opt != 0){
+        $.ajax({
+            url: post_url,
+            type: request_method,
+            data: form_data
+        }).done(function (response) {
+
+        $('#resultadotmp').modal('toggle');
+        $( '#showsucess').text( "!! Guardado Com Sucesso " );
+        $('#showsucess').show();
+
+        setTimeout(function(){ 
+
+                var link = "#fec".concat(game);
+                $(link).find('.fechar').remove();
+
+               $('#showsucess').text("");
+               $('#showsucess').hide();
+               var text = '<span class="label label-danger">Jogo Fechado</span>';
+                $('#resultadotp').prop('selectedIndex',0);
+
+               $(link).html(text);
+
+         }, 1500);
+            
+        });
+    }else{
+        $('#resultadotmp').modal('toggle');
+        $( '#showerror').text( "!! Erro - Compo obrigatório !! " );
+        $('#showerror').show();
+
+        setTimeout(function(){ 
+
+               $('#showerror').text("");
+               $('#showerror').hide();
+               $('#resultadotmp').modal('toggle');
+
+         }, 1500);
+    }
+
+});
+
 
 
 $('.apostar').on('click', function(){

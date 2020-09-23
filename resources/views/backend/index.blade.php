@@ -14,6 +14,16 @@
 
 </style>
 
+
+ <div class="alert alert-success" id="showsucess" style="display:none; border-radius: 0; float: right; margin-top: 7%; position: fixed; width: 600px; z-index: 9999;margin-right: 15%;">
+              teste teste teste
+  </div>
+   <div class="alert alert-danger" id="showerror" style="display:none; border-radius: 0; float: right; margin-top: 7%; position: fixed;  width: 600px; z-index: 9999;margin-right: 15%;">
+              teste teste tetste 
+  </div>
+
+
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" >
       <!-- Content Header (Page header) -->
@@ -38,7 +48,6 @@
                 </div>
                 <div class="col-xs-8">
                     <form action="{{route('home')}}" method="GET" class="form-inline">
-
                       <div class="input-group">         <!-- radio -->
                           <div class="form-group">
                             <div class="radio-inline">
@@ -76,11 +85,21 @@
                      <div class="input-group">
 
                        <span class="input-group-btn">
-                            <a href="{{route('home.data',1)}}?" class="btn btn-default " type="button" ><i class="fa fa-arrow-left"></i></a>
+                        <form action="{{route('home.data')}}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" value="1" name="data">
+                            <button type="submit" class="btn btn-default "><i class="fa fa-arrow-left"></i></button>
+                        </form>
+                         
                        </span>
                        <input type="text" class="form-control text-center" value="{{ $datatmp }}" readonly="true">
                        <span class="input-group-btn">
-                            <a href="{{route('home.data',2)}}" class="btn btn-default " type="button"><i class="fa fa-arrow-right"></i></a>
+                        <form action="{{route('home.data')}}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" value="2" name="data">
+                            <button type="submit" class="btn btn-default "><i class="fa fa-arrow-right"></i></button>
+                        </form>
+                            
                        </span>
                      </div>
           
@@ -108,18 +127,21 @@
                     <th class="col-xs-2">Fora</th>
                     <th>Data</th>
                     <th>Situação</th>
-                    
-                    <th class="col-xs-1 text-center">Resultado</th>
+                    @if($ck1!=1) 
+                       <th class="col-xs-1 text-center">Resultado</th>
+                    @endif
                   </tr>
                   </thead>
                   <tbody>
                       @foreach( $jogo as $item)
                           <tr>
                            <td  class="col-xs-1 text-center">
-                              @if($item->_aposta == '0')
-                              <button type="button" idjogo="{{ $item->id }}"  class="btn btn-sm btn-info btn-flat pull-left apostar">
+                            @if($item->_aposta == '0')
+                            <div id="{{ $item->id }}">
+                              <button type="button" idjogo="{{ $item->id }}" class="btn btn-sm btn-info btn-flat pull-left apostar">
                                   <i class="fa fa-plus-circle"></i>
-                            </button>
+                              </button>
+                            </div>
                             @else
                               <span class="label label-warning"> {{ $item->_aposta }} </span>
                             @endif
@@ -132,15 +154,16 @@
                                 @if($item->situacao == 1)
                                   <span class="label label-danger">Jogo Fechado</span>
                                 @elseif($item->situacao == 0)
-
-                                  <button type="button"  idjogo="{{ $item->id }}" class="btn btn-sm btn-success btn-flat fechar">
-                                          Fechar Jogo
-                                  </button>
+                                  <div id="fec{{ $item->id }}">
+                                    <button type="button"  idjogo="{{ $item->id }}" class="btn btn-sm btn-success btn-flat fechar">
+                                            Fechar Jogo
+                                    </button>
+                                  </div>
                                 @else
                                       <span class="label label-warning">Cancelado</span>
                                 @endif
                             </td>
-
+                            @if($ck1 != 1)
                                @if($item->resultado == '0')
                                    <td  class="col-xs-1 text-center"> <span class="label label-danger"> S/ Resultado </span></td>
                                @elseif($item->resultado == '1' || $item->resultado == 'x' || $item->resultado == '2' )
@@ -148,6 +171,7 @@
                                @else
                                    <td  class="col-xs-1 text-center"> <span class="label label-warning"> Cancelado </span></td>
                                @endif
+                           @endif   
                           </tr>
                     @endforeach
                   </tbody>
@@ -174,9 +198,9 @@
                         <li class="item"> 
                           <div class="product-info">
 
-                             @if(file_exists(public_path().'/logotipo/User/user_'.$item->utilizador[0]->id.'.jpg'))
+                             @if(file_exists(asset('/logotipo/User/user_'.$item->utilizador[0]->id.'.jpg')))
 
-                                 <img src="{{ public_path().'/logotipo/User/user_1.jpg' }}" class="img-circle" alt="User Image" style="margin-right: 2%; max-width: 10%;">
+                                 <img src="{{ asset('/logotipo/User/user_1.jpg') }}" class="img-circle" alt="User Image" style="margin-right: 2%; max-width: 10%;">
                              @else
                                  <img src="https://fakeimg.pl/160x160/" class="img-circle" alt="User Image" style="margin-right: 2%;max-width: 10%;">
                               @endif
@@ -254,18 +278,18 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div> 
-       <form name="formsend" method="POST" action="{{route('aposta')}}">
+       <form name="formsendgame" method="POST" action="{{route('aposta')}}">
         <div class="modal-body">
               <input type="hidden" id="user_id" name="user_id" value="{{$userId}}">
               <input type="hidden" id="jogo_id" name="jogo_id" value="">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Apostar</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="aposta">
-                  <option val="0">-- Selecionar uma aposta --</option>
-                  <option val="1">1</option>
-                  <option val="x">x</option>
-                  <option val="2">2</option>
+                <select class="form-control" id="apostatmp" name="aposta">
+                  <option value="0">-- Selecionar uma aposta --</option>
+                  <option value="1">1</option>
+                  <option value="x">x</option>
+                  <option value="2">2</option>
                 </select>
               </div>
             
@@ -288,19 +312,19 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div> 
-       <form name="formsend" method="POST" action="{{route('jogo.closebet')}}">
+       <form name="formsendaposta" method="POST" action="{{route('jogo.closebet')}}">
         <div class="modal-body">
               <input type="hidden" id="user_id" name="user_id" value="{{$userId}}">
               <input type="hidden" id="jogoid" name="jogoid" value="">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Resultado</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="resultado">
-                  <option val="0">-- Selecionar uma aposta --</option>
-                  <option val="1">1</option>
-                  <option val="x">x</option>
-                  <option val="2">2</option>
-                  <option val="3">Cancelado</option>
+                <select class="form-control" id="resultadotp" name="resultado">
+                  <option value="0">-- Selecionar uma aposta --</option>
+                  <option value="1">1</option>
+                  <option value="x">x</option>
+                  <option value="2">2</option>
+                  <option value="3">Cancelado</option>
                 </select>
               </div>
             
