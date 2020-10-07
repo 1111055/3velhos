@@ -36,12 +36,23 @@ class ApostaController extends Controller
      */
     public function store(Request $request)
     {
-        Aposta::create([
-            'user_id'    => request()->user_id,
-            'jogo_id'    => request()->jogo_id,
-            'aposta'     => request()->aposta
-            
-        ]);
+
+        $bet = Aposta::where('user_id','=',request()->user_id)->where('jogo_id','=',request()->jogo_id)->get();
+
+      
+        if(count($bet) == 0){
+                Aposta::create([
+                    'user_id'    => request()->user_id,
+                    'jogo_id'    => request()->jogo_id,
+                    'aposta'     => request()->aposta
+                    
+                ]);
+        }else{
+            $value = $bet->first();
+
+             $value->aposta  = request()->aposta;
+             $value->save();
+        }
 
          return response()->json(0);
     }

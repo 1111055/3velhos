@@ -37,6 +37,66 @@
 
 <script>
 
+$('.apptmp').on('click', function(){
+
+    var btn = $(this);
+    if(  $(this).attr('class') == 'btn btn-default apptmp'){
+
+
+            var post_url = $("#rota").val(); //get form action url
+            var request_method = "POST"; //get form GET/POST method
+            var opt =  $('#apostatmp').val();
+            var game = $(this).attr('idjogo');
+            var opt = $(this).attr('app');
+            var user_id = $('#user_id').val();
+            var token = $('#_token').val();
+
+          
+
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: { _token: token, user_id : user_id, jogo_id: game, aposta: opt } 
+            }).done(function (response) {
+                if(response == 0){
+
+                         btn.closest('tr').find('td').each(function() {
+
+
+                            var  btntnp =  $(this).find('button');
+                            var idjogo = btntnp.attr('app');
+                             if(idjogo){
+                                 if(btn.text() == btntnp.text()){
+                                   btn.attr('class', 'btn btn-success apptmp');
+                                 }else{
+                                      btntnp.attr('class', 'btn btn-default apptmp');
+                                 }
+                             }
+
+                       });
+                                          
+                }else{
+
+                        $( '#showerror').text( "!! Erro -Ja exite uma aposta sobre este jogo. !! " );
+                        $('#showerror').show();
+
+                        setTimeout(function(){ 
+
+                               $('#showerror').text("");
+                               $('#showerror').hide();
+
+                         }, 1500);
+                }
+             
+            });
+       
+
+         
+    }else{
+          $(this).attr('class', 'btn btn-default apptmp');
+    }
+});
+
 $("form[name='formsend']").submit(function (e) {
     e.preventDefault();
 
@@ -118,8 +178,6 @@ $("form[name='formsendaposta']").submit(function (e) {
     var form_data = $(this).serialize(); //Encode form elements for submission
     var opt =  $('#resultadotp').val();
     var game = $('#jogoid').val();
-
-    alert(opt);
 
     if(opt != 0){
         $.ajax({

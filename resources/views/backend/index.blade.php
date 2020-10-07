@@ -11,15 +11,20 @@
     align-items: stretch;
   }
 }
-
+.apptmp{
+  width: 100%;
+}
+.apptmp2{
+  width: 100%;
+}
 </style>
 
 
- <div class="alert alert-success" id="showsucess" style="display:none; border-radius: 0; float: right; margin-top: 7%; position: fixed; width: 600px; z-index: 9999;margin-right: 15%;">
-              teste teste teste
+  <div class="alert alert-success" id="showsucess" style="display:none; border-radius: 0; float: right; margin-top: 7%; position: fixed; width: 600px; z-index: 9999;margin-right: 15%;">
+             
   </div>
-   <div class="alert alert-danger" id="showerror" style="display:none; border-radius: 0; float: right; margin-top: 7%; position: fixed;  width: 600px; z-index: 9999;margin-right: 15%;">
-              teste teste tetste 
+  <div class="alert alert-danger" id="showerror" style="display:none; border-radius: 0; float: right; margin-top: 7%; position: fixed;  width: 600px; z-index: 9999;margin-right: 15%;">
+             
   </div>
 
 
@@ -121,7 +126,6 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th class="col-xs-1 text-center">Apostar</th>
                     <th class="col-xs-2 text-right">Casa</th>
                     <th class="col-xs-1 text-center">x</th>
                     <th class="col-xs-2">Fora</th>
@@ -135,20 +139,33 @@
                   <tbody>
                       @foreach( $jogo as $item)
                           <tr>
-                           <td  class="col-xs-1 text-center">
-                            @if($item->_aposta == '0')
-                            <div id="{{ $item->id }}">
-                              <button type="button" idjogo="{{ $item->id }}" class="btn btn-sm btn-info btn-flat pull-left apostar">
-                                  <i class="fa fa-plus-circle"></i>
-                              </button>
-                            </div>
-                            @else
-                              <span class="label label-warning"> {{ $item->_aposta }} </span>
-                            @endif
+                            <td class="col-xs-2  text-right">
+                              
+                                @if($item->_aposta == "1")
+
+                                  <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-success apptmp">{{ $item->eq1 }}   </button>
+                           
+                                 @else
+                                  <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-default apptmp">{{ $item->eq1 }}  </button>
+                            
+                              @endif
                             </td>
-                            <td class="col-xs-2  text-right"><span>{{ $item->eq1 }}</span></td>
-                            <td class="col-xs-1  text-center">X</td>
-                            <td class="col-xs-2"><span>{{ $item->eq2 }}</span></td>
+                            <td class="col-xs-1  text-center">
+                           
+                               @if($item->_aposta == "x")
+                                 <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-success apptmp">X</button>
+                                @else
+                                  <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-default apptmp">X</button>
+                                @endif
+                            </td>
+                            <td class="col-xs-2">
+                       
+                               @if($item->_aposta == "2")
+                                 <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-success apptmp">{{ $item->eq2 }}</button>
+                               @else
+                                 <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-default apptmp">{{ $item->eq2 }}</button>
+                               @endif
+                            </td>
                             <td><span class="label label-success">{{ $item->data_encontro }}</span></td>
                             <td>
                                 @if($item->situacao == 1)
@@ -278,11 +295,11 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div> 
-       <form name="formsendgame" method="POST" action="{{route('aposta')}}">
+       <form name="formsendgame" method="POST" action="">
         <div class="modal-body">
-              <input type="hidden" id="user_id" name="user_id" value="{{$userId}}">
+              <input type="hidden" id="rota" name="rota" value="{{route('aposta')}}">
               <input type="hidden" id="jogo_id" name="jogo_id" value="">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Apostar</label>
                 <select class="form-control" id="apostatmp" name="aposta">
@@ -292,7 +309,6 @@
                   <option value="2">2</option>
                 </select>
               </div>
-            
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
