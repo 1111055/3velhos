@@ -75,9 +75,9 @@ $('.apptmp').on('click', function(){
 
                        });
                                           
-                }else{
+                }else if(response == 5){
 
-                        $( '#showerror').text( "!! Erro -Ja exite uma aposta sobre este jogo. !! " );
+                        $( '#showerror').text( "!! Erro -Já se encotra fechado este jogo, viesses mais cedo !! " );
                         $('#showerror').show();
 
                         setTimeout(function(){ 

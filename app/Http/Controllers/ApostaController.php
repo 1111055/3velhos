@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Aposta;
+use App\Jogo;
 use App\Http\Requests\ApostaRequest;
+use Carbon\Carbon;
 
 class ApostaController extends Controller
 {
@@ -39,22 +41,134 @@ class ApostaController extends Controller
 
         $bet = Aposta::where('user_id','=',request()->user_id)->where('jogo_id','=',request()->jogo_id)->get();
 
-      
-        if(count($bet) == 0){
-                Aposta::create([
-                    'user_id'    => request()->user_id,
-                    'jogo_id'    => request()->jogo_id,
-                    'aposta'     => request()->aposta
-                    
-                ]);
-        }else{
-            $value = $bet->first();
+        $pode = $this->canBetData(request()->jogo_id);
 
-             $value->aposta  = request()->aposta;
-             $value->save();
+
+        if($pode == true){
+            if(count($bet) == 0){
+                    Aposta::create([
+                        'user_id'    => request()->user_id,
+                        'jogo_id'    => request()->jogo_id,
+                        'aposta'     => request()->aposta
+                        
+                    ]);
+            }else{
+                $value = $bet->first();
+
+                 $value->aposta  = request()->aposta;
+                 $value->save();
+            }
+
+             return response()->json(0);
+        }else{
+             return response()->json(5);
+        }
+    }
+
+
+    private function canBetData($id)
+    {
+        $result = false;
+
+        $jogo = Jogo::find($id);
+
+        $data = $jogo->data_encontro;
+        $dataconvert = Carbon::parse($data);
+
+        // Data do jogo
+        $yearjogo   = $dataconvert->year;
+        $monthjogo  = $dataconvert->month;
+        $dayjogo    = $dataconvert->day;        
+        $horajogo   = $dataconvert->hour;
+        $minutojogo = $dataconvert->minute;
+
+        $time =Carbon::now()->setTimezone('Europe/Lisbon');
+
+        // dados now
+        $year   = $time->year;
+        $month  = $time->month;
+        $day    = $time->day;        
+        $hora   = $time->hour;
+        $minuto = $time->minute;
+
+        $horajogo = $jogo->hora;
+        $splitName = explode(' ', $horajogo); 
+
+        $splitNametwo = explode(':', $splitName[0]); 
+
+        $horajogo =  $splitNametwo[0];
+        $minutosjogo =  $splitNametwo[1];
+
+        if($splitName[1] == "PM"){
+
+            $horajogo = $this->convert12to24($splitNametwo[0]);
         }
 
-         return response()->json(0);
+
+
+        if( $year <= $yearjogo && $month <= $monthjogo && $day <= $dayjogo){
+            if($hora < $horajogo){
+                 $result = true;
+            }
+        }
+
+
+        return $result;
+
+
+    }
+
+    public function convert12to24($hora)
+    {
+
+        $conversao = $hora;
+
+
+
+        switch ($hora) {
+          case 1:
+           $conversao = 13;
+            break;
+          case 2:
+            $conversao = 14;
+            break;
+          case 3:
+             $conversao = 15;
+            break;
+          case 4:
+            $conversao = 16;
+             break;
+          case 5:
+            $conversao = 17;
+             break;
+          case 6:
+            $conversao = 18;
+             break;
+          case 7:
+            $conversao = 19;
+             break;
+          case 8:
+            $conversao = 20;
+             break;
+          case 9:
+            $conversao = 21;
+             break;
+           case 10:
+            $conversao = 22;
+             break;
+           case 11:
+            $conversao = 23;
+              break;
+           case 12:
+            $conversao = 24;
+              break;
+          default:
+              $hora;
+        }
+
+        return $conversao;
+
+
     }
 
     /**

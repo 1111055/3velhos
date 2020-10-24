@@ -129,7 +129,7 @@
                     <th class="col-xs-2 text-right">Casa</th>
                     <th class="col-xs-1 text-center">x</th>
                     <th class="col-xs-2">Fora</th>
-                    <th>Data</th>
+                    <th>Hora</th>
                     <th>Situação</th>
                     @if($ck1!=1) 
                        <th class="col-xs-1 text-center">Resultado</th>
@@ -166,7 +166,7 @@
                                  <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-default apptmp">{{ $item->eq2 }}</button>
                                @endif
                             </td>
-                            <td><span class="label label-success">{{ $item->data_encontro }}</span></td>
+                            <td><span class="label label-success">{{ $item->hora }}</span></td>
                             <td>
                                 @if($item->situacao == 1)
                                   <span class="label label-danger">Jogo Fechado</span>
@@ -262,19 +262,19 @@
                 <label for="exampleInputPassword1">Data</label>
                 <input type="date" class="form-control" id="data_encontro" name="data_encontro">
               </div>
-              <!--div class="bootstrap-timepicker">
+              <div class="bootstrap-timepicker">
                 <div class="form-group">
                   <label>Hora:</label>
 
                   <div class="input-group">
-                    <input type="text" class="form-control timepicker">
+                    <input type="text" name="hora" class="form-control timepicker">
 
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
                     </div>
                   </div>
                 </div>
-              </div-->
+              </div>
             
         </div>
         <div class="modal-footer">

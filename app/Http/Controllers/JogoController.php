@@ -130,6 +130,7 @@ class JogoController extends Controller
             'eq1'           => request()->eq1,
             'eq2'           => request()->eq2,
             'data_encontro' => request()->data_encontro,
+            'hora'          => request()->hora,
             'situacao'      => 0,
             'resultado'     => 0,
         ]);
