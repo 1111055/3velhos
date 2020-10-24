@@ -37,6 +37,10 @@
 
 <script>
 
+ $(document).ready(function() {
+    classificacoes();
+});
+
 $('.apptmp').on('click', function(){
 
     var btn = $(this);
@@ -186,6 +190,7 @@ $("form[name='formsendaposta']").submit(function (e) {
             data: form_data
         }).done(function (response) {
 
+        classificacoes();
         $('#resultadotmp').modal('toggle');
         $( '#showsucess').text( "!! Guardado Com Sucesso " );
         $('#showsucess').show();
@@ -209,7 +214,7 @@ $("form[name='formsendaposta']").submit(function (e) {
         $('#resultadotmp').modal('toggle');
         $( '#showerror').text( "!! Erro - Compo obrigatório !! " );
         $('#showerror').show();
-
+       classificacoes();
         setTimeout(function(){ 
 
                $('#showerror').text("");
@@ -300,5 +305,23 @@ if ($(window).width() < 514) {
     $('#Classificacaoclass').attr('class', 'container col-xs-4');
     $('#filterclass').attr('class', 'container col-xs-8');
 }
+
+
+function classificacoes(){
+        jQuery('#classifica').html('');
+        $.get("{{ route('classificacao.getall') }}")
+          .done(function( data ) {
+
+            data.forEach(function(entry) {
+             console.log(entry);
+
+             var html =  "<li class='item'><div class='product-info'><a href='javascript:void(0)' class='product-title'>"+ entry['nome'] +"<span class='label label-success pull-right'>"+ entry['pontos'] +"</span></a></div></li>";
+
+             $( "#classifica" ).append(html);
+            });
+                     
+          });
+
+  }
 
 </script>

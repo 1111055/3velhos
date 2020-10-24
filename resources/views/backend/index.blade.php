@@ -17,6 +17,27 @@
 .apptmp2{
   width: 100%;
 }
+
+
+.three-inline-buttons .button {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.three-inline-buttons {
+     display: table;
+     margin: 0 auto;
+}
+
+@media only screen and (max-width: 960px) {
+
+    .three-inline-buttons .button{
+        width: 100%;
+        margin: 20px;
+        text-align: center;
+    }
+    
+}
 </style>
 
 
@@ -51,39 +72,30 @@
                         Inserir Novo Jogo
                     </button>
                 </div>
-                <div class="col-xs-8">
-                    <form action="{{route('home')}}" method="GET" class="form-inline">
-                      <div class="input-group">         <!-- radio -->
-                          <div class="form-group">
-                            <div class="radio-inline">
+                <div class="col-xs-12">
+                   
+                          <div class="three-inline-buttons">
+                          <p>
                               <label>
-                                <input type="radio" value="1" id="op0" @if($ck0==1) checked="TRUE" @endif name="op0">
-                                Todos
-                              
+                                  <a href="{{route('home')}}?op0=1" class="btn @if($ck0==1) btn-warning @else btn-default @endif btn-xs">Todos</a>
                               </label>
-                            </div>
-                            <div class="radio-inline">
+
                               <label>
-                                <input type="radio"   value="1"  id="op1" @if($ck1==1) checked="TRUE" @endif name="op1">
-                                   Abertos
+                                  <a href="{{route('home')}}?op1=1" class="btn @if($ck1==1) btn-warning @else btn-default @endif btn-xs">Abertos</a>
                               </label>
-                            </div>
-                            <div class="radio-inline">
+
                               <label> 
-                                  <input type="radio"  value="1"  id="op2" @if($ck2==1) checked="TRUE" @endif name="op2">
-                                  Fechados
+                                <a href="{{route('home')}}?op2=1" class="btn @if($ck2==1) btn-warning @else btn-default @endif  btn-xs">Fechados</a>
                               </label>
-                            </div> 
-                           <div class="radio-inline">
+
                               <label>
-                                  <input type="radio" value="1"  id="op3" @if($ck3==1) checked="TRUE" @endif name="op3">
-                                  Cancelados
+                                  <a href="{{route('home')}}?op3=1" class="btn @if($ck3==1) btn-warning @else btn-default @endif btn-xs">Cancelados</a>
                               </label>
-                            </div>
-                              <button type="submit" class="btn btn-primary" >Filtrar</button>
-                          </div>
+
+                            
+                          </p>
                          </div>
-                    </form>
+            
                 </div>
                 <div class="col-xs-2" id="bodyarrow" style="float: right;">
                   
@@ -208,25 +220,8 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                      <ul class="products-list product-list-in-box">
-                      @foreach($class as $item)
-
-
-                        <li class="item"> 
-                          <div class="product-info">
-
-                             @if(file_exists(asset('/logotipo/User/user_'.$item->utilizador[0]->id.'.jpg')))
-
-                                 <img src="{{ asset('/logotipo/User/user_1.jpg') }}" class="img-circle" alt="User Image" style="margin-right: 2%; max-width: 10%;">
-                             @else
-                                 <img src="https://fakeimg.pl/160x160/" class="img-circle" alt="User Image" style="margin-right: 2%;max-width: 10%;">
-                              @endif
-                            
-                            <a href="javascript:void(0)" class="product-title">{{$item->utilizador[0]->name }}
-                              <span class="label label-success pull-right">{{ $item->pontos }}</span></a>
-                          </div>
-                        </li>
-                        @endforeach
+                      <ul class="products-list product-list-in-box" id="classifica">
+                     
                       </ul>
                     </div>
                   </div>

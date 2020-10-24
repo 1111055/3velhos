@@ -86,6 +86,9 @@ Route::post('jogo/newgame',                          ['as' => 'jogo.newgame',   
 //Aposta                    
 Route::post('aposta', 'ApostaController@store')->name('aposta');
 
+//classificações
+Route::get('classificacao/getall',                     ['as' => 'classificacao.getall',    'uses' => 'ClassificacoesController@getall']); 
+
 
 
 Auth::routes();

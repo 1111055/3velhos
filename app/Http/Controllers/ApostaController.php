@@ -68,7 +68,7 @@ class ApostaController extends Controller
 
     private function canBetData($id)
     {
-        $result = false;
+       
 
         $jogo = Jogo::find($id);
 
@@ -104,14 +104,37 @@ class ApostaController extends Controller
             $horajogo = $this->convert12to24($splitNametwo[0]);
         }
 
+        if($year < $yearjogo){
 
+               return true;
 
-        if( $year <= $yearjogo && $month <= $monthjogo && $day <= $dayjogo){
-            if($hora < $horajogo){
-                 $result = true;
+        }elseif($year == $yearjogo){
+            if($month < $monthjogo){
+                return true;
+            }elseif($month == $monthjogo){
+                  if($day < $dayjogo){
+                        return true;
+                    }elseif($day == $dayjogo){
+
+                         if($hora < $horajogo){
+                                return true;
+                            }else{
+                                return false;
+                            }
+
+                    }else{
+                        return false;
+                    }
+
+            }else{
+                return false;
             }
+
+        }else{
+            return false;
         }
 
+    
 
         return $result;
 
