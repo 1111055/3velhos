@@ -97,7 +97,11 @@
                          </div>
             
                 </div>
-                <div class="col-xs-2" id="bodyarrow" style="float: right;">
+
+            </div>
+                   <div class="col-xs-4"></div>
+
+                <div class="col-xs-4" id="bodyarrow">
                   
                      <div class="input-group">
 
@@ -121,7 +125,6 @@
                      </div>
           
                 </div>
-            </div>
             <!-- /.box-footer -->
             </div>
           </div>
@@ -141,7 +144,6 @@
                     <th class="col-xs-2 text-right">Casa</th>
                     <th class="col-xs-1 text-center">x</th>
                     <th class="col-xs-2">Fora</th>
-                    <th>Hora</th>
                     <th>Situação</th>
                     @if($ck1!=1) 
                        <th class="col-xs-1 text-center">Resultado</th>
@@ -150,35 +152,37 @@
                   </thead>
                   <tbody>
                       @foreach( $jogo as $item)
+                      <tr><td colspan="3" class="text-center"><span class="label label-success text-center">{{ $item->hora }}</span></td><td></td>  @if($ck1!=1)<td></td> @endif</tr>
                           <tr>
+
                             <td class="col-xs-2  text-right">
                               
                                 @if($item->_aposta == "1")
 
-                                  <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-success apptmp">{{ $item->eq1 }}   </button>
+                                  <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-success  btn-sm apptmp">{{ $item->eq1 }}   </button>
                            
                                  @else
-                                  <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-default apptmp">{{ $item->eq1 }}  </button>
+                                  <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-default  btn-sm apptmp">{{ $item->eq1 }}  </button>
                             
                               @endif
                             </td>
                             <td class="col-xs-1  text-center">
                            
                                @if($item->_aposta == "x")
-                                 <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-success apptmp">X</button>
+                                 <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-success  btn-sm apptmp">X</button>
                                 @else
-                                  <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-default apptmp">X</button>
+                                  <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-default  btn-sm apptmp">X</button>
                                 @endif
                             </td>
                             <td class="col-xs-2">
                        
                                @if($item->_aposta == "2")
-                                 <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-success apptmp">{{ $item->eq2 }}</button>
+                                 <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-success  btn-sm apptmp">{{ $item->eq2 }}</button>
                                @else
-                                 <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-default apptmp">{{ $item->eq2 }}</button>
+                                 <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-default  btn-sm apptmp">{{ $item->eq2 }}</button>
                                @endif
                             </td>
-                            <td><span class="label label-success">{{ $item->hora }}</span></td>
+                            
                             <td>
                                 @if($item->situacao == 1)
                                   <span class="label label-danger">Jogo Fechado</span>

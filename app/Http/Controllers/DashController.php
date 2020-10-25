@@ -36,7 +36,7 @@ class DashController extends Controller
 
                 $datatmp = carbon::now()->format('M d');;
                 $jogo = Jogo::where('data_encontro', '>=', carbon::now()->startOfDay())->where('data_encontro', '<', carbon::now()->addDays(1)->startOfDay())->
-                orderBy('data_encontro','desc')->get();
+                orderBy('hora','desc')->get();
                 $request->session()->put('datafilter', Carbon::now());
                    
         }else{
@@ -47,7 +47,7 @@ class DashController extends Controller
                 $depois = $antes->copy()->addDays(1)->startOfDay()->format('y-m-d H:i:s');
 
                 $jogo = Jogo::where('data_encontro', '>=',   $antes->startOfDay()->format('y-m-d H:i:s'))->where('data_encontro', '<', $depois)->
-                       orderBy('data_encontro','desc')->get();
+                       orderBy('hora','asc')->get();
               
         }
 
@@ -103,7 +103,7 @@ class DashController extends Controller
                    
          }    
          // dd($jogo);
-
+//dd($datatmp);
         $user->authorizeRoles(['master', 'supermaster']);
 
 
@@ -197,7 +197,7 @@ class DashController extends Controller
             }
                    
          }    
-         // dd($jogo);
+         //dd($datatmp);
 
         $user->authorizeRoles(['master', 'supermaster']);
 
