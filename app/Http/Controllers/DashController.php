@@ -36,7 +36,7 @@ class DashController extends Controller
 
                 $datatmp = carbon::now()->format('M d');;
                 $jogo = Jogo::where('data_encontro', '>=', carbon::now()->startOfDay())->where('data_encontro', '<', carbon::now()->addDays(1)->startOfDay())->
-                orderBy('hora','desc')->get();
+                orderBy('hora','asc')->get();
                 $request->session()->put('datafilter', Carbon::now());
                    
         }else{

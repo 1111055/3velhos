@@ -44,7 +44,7 @@
 $('.apptmp').on('click', function(){
 
     var btn = $(this);
-    if(  $(this).attr('class') == 'btn btn-default apptmp'){
+    if(  $(this).attr('class') == 'btn btn-default btn-sm apptmp'){
 
 
             var post_url = $("#rota").val(); //get form action url
@@ -71,9 +71,9 @@ $('.apptmp').on('click', function(){
                             var idjogo = btntnp.attr('app');
                              if(idjogo){
                                  if(btn.text() == btntnp.text()){
-                                   btn.attr('class', 'btn btn-success apptmp');
+                                   btn.attr('class', 'btn btn-success btn-sm apptmp');
                                  }else{
-                                      btntnp.attr('class', 'btn btn-default apptmp');
+                                      btntnp.attr('class', 'btn btn-default btn-sm apptmp');
                                  }
                              }
 
@@ -97,7 +97,7 @@ $('.apptmp').on('click', function(){
 
          
     }else{
-          $(this).attr('class', 'btn btn-default apptmp');
+          $(this).attr('class', 'btn btn-default btn-sm apptmp');
     }
 });
 

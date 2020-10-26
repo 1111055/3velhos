@@ -7,7 +7,7 @@
   <div class="login-logo">
 
     <div class="login-logo">
-   <img src="{{asset('/images/logo.jpg')}}" alt="logo-image" 
+   <img src="{{asset('/images/logo.png')}}" alt="logo-image" 
     style="max-width: 250px";>
   </div>
   </div>

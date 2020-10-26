@@ -152,34 +152,34 @@
                   </thead>
                   <tbody>
                       @foreach( $jogo as $item)
-                      <tr><td colspan="3" class="text-center"><span class="label label-success text-center">{{ $item->hora }}</span></td><td></td>  @if($ck1!=1)<td></td> @endif</tr>
+                      <tr><td colspan="3" class="text-center"><span class="label label-default text-center">{{ $item->hora }}</span></td><td></td>  @if($ck1!=1)<td></td> @endif</tr>
                           <tr>
 
                             <td class="col-xs-2  text-right">
                               
                                 @if($item->_aposta == "1")
 
-                                  <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-success  btn-sm apptmp">{{ $item->eq1 }}   </button>
+                                  <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-success btn-sm apptmp">{{ $item->eq1 }}   </button>
                            
                                  @else
-                                  <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-default  btn-sm apptmp">{{ $item->eq1 }}  </button>
+                                  <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-default btn-sm apptmp">{{ $item->eq1 }}  </button>
                             
                               @endif
                             </td>
                             <td class="col-xs-1  text-center">
                            
                                @if($item->_aposta == "x")
-                                 <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-success  btn-sm apptmp">X</button>
+                                 <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-success btn-sm apptmp">X</button>
                                 @else
-                                  <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-default  btn-sm apptmp">X</button>
+                                  <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-default btn-sm apptmp">X</button>
                                 @endif
                             </td>
                             <td class="col-xs-2">
                        
                                @if($item->_aposta == "2")
-                                 <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-success  btn-sm apptmp">{{ $item->eq2 }}</button>
+                                 <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-success btn-sm apptmp">{{ $item->eq2 }}</button>
                                @else
-                                 <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-default  btn-sm apptmp">{{ $item->eq2 }}</button>
+                                 <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-default btn-sm apptmp">{{ $item->eq2 }}</button>
                                @endif
                             </td>
                             
