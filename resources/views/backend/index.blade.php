@@ -38,6 +38,21 @@
     }
     
 }
+table#mytable,
+table#mytable td
+{
+    border: none !important;
+    padding:2px; 
+    border-width:0px; 
+    margin:0px; 
+}
+table#mytable {
+border:0px;
+border-collapse:collapse;
+border-spacing:0px;
+}
+
+
 </style>
 
 
@@ -138,12 +153,12 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="table-responsive">
-                <table class="table no-margin">
+                <table class="table no-margin" id="mytable" cellspacing="0" cellpadding="0">
                   <thead>
                   <tr>
-                    <th class="col-xs-2 text-right">Casa</th>
+                    <th class="col-xs-2 text-center">Casa</th>
                     <th class="col-xs-1 text-center">x</th>
-                    <th class="col-xs-2">Fora</th>
+                    <th class="col-xs-2 text-center">Fora</th>
                     <th>Situação</th>
                     @if($ck1!=1) 
                        <th class="col-xs-1 text-center">Resultado</th>

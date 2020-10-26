@@ -100,14 +100,94 @@ class DashController extends Controller
             }else{
                   $value['_aposta'] = "0";
             }
+
+            $horajogo =  $value->hora;
+
+            $splitName = explode(' ', $horajogo); 
+
+            $splitNametwo = explode(':', $splitName[0]); 
+
+            $horajogo =  $splitNametwo[0];
+            $minutosjogo =  $splitNametwo[1];
+
+            if($splitName[1] == "PM"){
+
+                $horajogotmp = $this->convert12to24($splitNametwo[0]);
+                $teste = str_replace($horajogo,$horajogotmp, $value->hora);
+                $testetmp = str_replace("PM",' ', $teste);
+
+            }else{
+
+                $testetmp = str_replace("AM",' ', $value->hora);
+            }
+
+
+            $value->hora = $testetmp;
+
+           // dd($horajogotmp);
                    
          }    
+         $jogo = $jogo->sortBy('hora');
+      
          // dd($jogo);
 //dd($datatmp);
         $user->authorizeRoles(['master', 'supermaster']);
 
 
         return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp'));
+    }
+
+      public function convert12to24($hora)
+    {
+
+        $conversao = $hora;
+
+
+
+        switch ($hora) {
+          case 1:
+           $conversao = 13;
+            break;
+          case 2:
+            $conversao = 14;
+            break;
+          case 3:
+             $conversao = 15;
+            break;
+          case 4:
+            $conversao = 16;
+             break;
+          case 5:
+            $conversao = 17;
+             break;
+          case 6:
+            $conversao = 18;
+             break;
+          case 7:
+            $conversao = 19;
+             break;
+          case 8:
+            $conversao = 20;
+             break;
+          case 9:
+            $conversao = 21;
+             break;
+           case 10:
+            $conversao = 22;
+             break;
+           case 11:
+            $conversao = 23;
+              break;
+           case 12:
+            $conversao = 24;
+              break;
+          default:
+              $hora;
+        }
+
+        return $conversao;
+
+
     }
 
     /**
