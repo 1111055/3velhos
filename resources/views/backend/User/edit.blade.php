@@ -5,6 +5,21 @@
 
  @include('backend.alert')
  
+
+
+
+            @if (session('error'))
+               <div class="alert alert-danger" id="showsucess" style="display:block; border-radius: 0; float: right; margin-top: 7%; position: fixed; width: 600px; z-index: 9999;margin-right: 15%;">
+                    {{ session('error') }}
+               </div>
+            @endif
+            @if (session('success'))
+                <div class="alert alert-success" id="showerror" style="display:block; border-radius: 0; float: right; margin-top: 7%; position: fixed;  width: 600px; z-index: 9999;margin-right: 15%;">
+                    {{ session('success') }}
+               </div>
+            @endif
+
+
               <div class="content-wrapper">
                 <section class="content-header">
                   <h1>
@@ -16,9 +31,11 @@
                   </ol>
                 </section>
 
+
                 <!-- Main content -->
                 <section class="content container-fluid">             
-            <!-- /.row -->
+>
+
                   <div class="row">
                       <div class="col-xs-12">
                         <div class="box">
@@ -75,6 +92,10 @@
                                                 
                                             </div>
                                             <div class="box-footer">
+                                                                        <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Alterar PassWord
+                  </button>
                                                 {!! Form::submit('Guardar',['class' => 'btn btn-info pull-right']) !!}
                                             </div>
                                           {!! Form::close() !!}
@@ -88,44 +109,66 @@
                 </section>
               </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alterar PassWord</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+       <form class="form-horizontal" method="POST" action="{{ route('user.changePassword') }}">
+              {{ csrf_field() }}
+
+              <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                  <label for="new-password" class="col-md-4 control-label">Password antiga</label>
+
+                  <div class="col-md-6">
+                      <input id="current-password" type="password" class="form-control" name="current-password" required>
+
+                      @if ($errors->has('current-password'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('current-password') }}</strong>
+                          </span>
+                      @endif
+                  </div>
+              </div>
+
+              <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
+                  <label for="new-password" class="col-md-4 control-label">Nova Password</label>
+
+                  <div class="col-md-6">
+                      <input id="new-password" type="password" class="form-control" name="new-password" required>
+
+                      @if ($errors->has('new-password'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('new-password') }}</strong>
+                          </span>
+                      @endif
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="new-password-confirm" class="col-md-4 control-label">Confirme Password</label>
+
+                  <div class="col-md-6">
+                      <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-md-6 col-md-offset-4">
+                      <button type="submit" class="btn btn-primary">
+                          Change Password
+                      </button>
+                  </div>
+              </div>
+    </form>
+      </div>
+    </div>
+  </div>
+</div>
 @stop
-@section('scripts')
-  <script src="{{ asset('backend/bower_components/ckeditor/ckeditor.js') }}"></script>
-  <script>
-          $(function () {
-          // Replace the <textarea id="editor1"> with a CKEditor
-          // instance, using default configuration.
-           CKEDITOR.replace('descricao')
-           CKEDITOR.replace('descricao1')
-           CKEDITOR.replace('descricao2')
-    
-          //bootstrap WYSIHTML5 - text editor
-          $('.textarea').wysihtml5()
-        })
 
-          $(document).ready(function() {
-              $(".btn-pref .btn").click(function () {
-                  $(".btn-pref .btn").removeClass("btn-warning").addClass("btn-default");
-                  // $(".tab").addClass("active"); // instead of this do the below 
-                  $(this).removeClass("btn-default").addClass("btn-warning");   
-              });
-          });
-
-         $("#add").on('click', function () {
-               
-                 var html = '<input type="text" name="titulo[]" id="titulo" class="form-control" /> <input type="text" name="titulo[]" id="titulo" class="form-control" /> </br>';
-           
-
-                  $(".addlines").append(html);
-
-
-          });
-
-
-      //Colorpicker
-      $('.my-colorpicker1').colorpicker()
-      //color picker with addon
-      $('.my-colorpicker2').colorpicker()
-  </script>
-
-@stop

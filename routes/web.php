@@ -65,6 +65,7 @@ Route::put('user/update/{id}',                   ['as' => 'user.update',  'uses'
 Route::delete('user/destroy/{id}',               ['as' => 'user.destroy', 'uses' => 'UserController@destroy']);
 Route::get('user/show/{id}',                     ['as' => 'user.show',    'uses' => 'UserController@show']);
 Route::post('user', 'UserController@store');
+Route::post('user/changePassword',                     ['as' => 'user.changePassword',    'uses' => 'UserController@changePassword']);
 
 
 
@@ -89,7 +90,7 @@ Route::post('aposta', 'ApostaController@store')->name('aposta');
 //classificações
 Route::get('classificacao/getall',                     ['as' => 'classificacao.getall',    'uses' => 'ClassificacoesController@getall']); 
 
-
+Route::get('password/recovery',                     ['as' => 'password.recovery',    'uses' => 'PassWordController@recovery']); 
 
 Auth::routes();
 

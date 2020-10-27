@@ -21,14 +21,15 @@
     <script src="{{ asset('backend/bower_components/jquery/dist/jquery.min.js') }}"></script>
 
      <script src="https://kit.fontawesome.com/e2c9ee503e.js" crossorigin="anonymous"></script>
+    
 
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ asset('backend/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
     <script src="{{ asset('backend/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
-     <script src="{{ asset('backend/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
-
-       <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('backend/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('js/multiselect2.js') }}"></script>
 
     <script src="{{ asset('backend/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>

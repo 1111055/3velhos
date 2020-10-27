@@ -1,3 +1,4 @@
+
 <html class="no-js" lang="en-US">
 @include('backend.head')
 
@@ -89,47 +90,41 @@ input[type="submit"].login:focus{outline: none;}
 
     <div id="formWrapper">
 
-<div id="form">
-<div class="logo">
+        <div id="form">
+            <div class="logo">
 
-   <img src="{{asset('/images/logo.png')}}" alt="logo-image" 
-    style="max-width: 250px";>
+               <img src="{{asset('/images/logo.png')}}" alt="logo-image" 
+                style="max-width: 250px";>
 
-</div>
-  <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-            {{ csrf_field() }}
-        <div class="form-item">
+            </div>
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
 
-             <input id="email" name="email" type="email" class="form-style"   placeholder="Email" value="{{ old('email') }}"  />  
-  
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
+            <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
+                {{ csrf_field() }}
+                <div class="form-item">
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+            
+                            <input id="email" type="email" class="form-style"  name="email" value="{{ old('email') }}" placeholder="Email" required>
+
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
+                       
+                    </div>
+                </div>
+                <div class="form-item text-center">
+                    <input type="submit" class="login" value="LogIn">
+                    <div class="clear-fix"></div>
+                </div>
+            </form>
+            
         </div>
-        <div class="form-item">
-
-            <input id="password" name="password" type="password" class="form-style"    placeholder="Password"/>
-
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-            <p>
-                                <a class="btn btn-link" href="{{ route('password.recovery') }}">
-                                    Esqueceu-se da PassWord?
-                                </a></p>    
-        </div>
-        <div class="form-item text-center">
-            <!-- p class="pull-left"><a href="#"><small>Register</small></a></p-->
-            <input type="submit" class="login" value="LogIn">
-            <div class="clear-fix"></div>
-        </div>
-   </form>
-</div>
-</div>
-
+    </div>
 </body>
 </html>

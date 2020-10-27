@@ -22,6 +22,6 @@ Fique atento ao seu email. <br><br>
 <br><br>
 
 
-www.feelbit.pt<br>
-Feel Bit
+www.3velhos.com<br>
+3 Velhos
 @endcomponent
