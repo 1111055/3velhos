@@ -27,4 +27,7 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   <script src="https://kit.fontawesome.com/e2c9ee503e.js" crossorigin="anonymous"></script>
+
+  <script data-ad-client="ca-pub-3388840355993924" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  
 </head>

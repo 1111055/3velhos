@@ -119,7 +119,7 @@ input[type="submit"].login:focus{outline: none;}
                     </div>
                 </div>
                 <div class="form-item text-center">
-                    <input type="submit" class="login" value="LogIn">
+                    <input type="submit" class="login" value="Recuperar">
                     <div class="clear-fix"></div>
                 </div>
             </form>
