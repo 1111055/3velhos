@@ -72,7 +72,7 @@ border-spacing:0px;
                 <div class="col-xs-8" id="jogoclass">
                   <div class="box">
             
-                    <div class="box-header text-center">
+                    <div class="box-header">
                     <button class="btn btn-default btn-sm" data-toggle="control-sidebar"><i class="fa fa-filter"></i> </button>  <h3 class="box-title">{{ $datatmp }}</h3>
                     </div>
                     <!-- /.box-header -->

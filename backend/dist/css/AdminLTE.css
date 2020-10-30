@@ -671,8 +671,8 @@ a:focus {
 .control-sidebar-bg,
 .control-sidebar {
   top: 0;
-  right: -230px;
-  width: 230px;
+  right: -275px;
+  width: 275px;
   -webkit-transition: right 0.3s ease-in-out;
   -o-transition: right 0.3s ease-in-out;
   transition: right 0.3s ease-in-out;
@@ -688,7 +688,7 @@ a:focus {
   }
 }
 .control-sidebar > .tab-content {
-  padding: 10px 15px;
+  padding: 10px 0px;
 }
 .control-sidebar.control-sidebar-open,
 .control-sidebar.control-sidebar-open + .control-sidebar-bg {
@@ -758,8 +758,7 @@ a:focus {
 }
 .control-sidebar-menu {
   list-style: none;
-  padding: 0;
-  margin: 0 -15px;
+
 }
 .control-sidebar-menu > li > a {
   display: block;

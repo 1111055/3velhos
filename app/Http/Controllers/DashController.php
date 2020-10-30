@@ -15,7 +15,7 @@ class DashController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['page']]);
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -137,26 +137,6 @@ class DashController extends Controller
         return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp'));
     }
 
-
-    public function page()
-    {
-      
-        $class = Classificacao::
-                 orderBy('pontos','desc')->get();
-  
-
-         $datatmp = carbon::now()->format('M d');
-
-        $jogo = Jogo::where('data_encontro', '>=', carbon::now()->startOfDay())->where('data_encontro', '<', carbon::now()->addDays(1)->startOfDay())->
-        orderBy('hora','asc')->get();
-           
-  
-        
-
-
-
-        return view('backend.page', compact('class','jogo','datatmp'));
-    }
 
 
 

@@ -23,7 +23,6 @@ Route::get('dash/piechart', 'DashController@piechart')->name('piechart');
 Route::get('dash/piechart/{id}/{tipo}',                ['as' => 'dash.piechart',    'uses' => 'DashController@piechart']); 
 Route::get('dash/mapschar/{id}/{tipo}',    ['as' => 'dash.mapschar',    'uses' => 'DashController@mapschar']); 
 Route::get('dash/userschar/{id}/{tipo}',   ['as' => 'dash.userschar',   'uses' => 'DashController@userschar']); 
-Route::get('/page',   ['as' => 'dash.page',   'uses' => 'DashController@page']); 
 
 
 
