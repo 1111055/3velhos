@@ -1,9 +1,9 @@
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-
+  <aside class="control-sidebar control-sidebar-dark" id="sidebr">
+ 
     <div class="tab-content">
       <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
+      <div class="tab-pane active" id="control-sidebar-home-tab" >
         <h3 class="control-sidebar-heading text-center">Filter</h3>
         <ul class="control-sidebar-menu">
           <li>
@@ -53,13 +53,28 @@
           </li>
         </ul>
 
+        <h3 class="control-sidebar-heading text-center">Grupos</h3>
+
         <ul class="control-sidebar-menu">
           <li class="text-center">
-             <button type="button" class="btn btn-sm btn-info  btn-sm" data-toggle="modal" data-target="#exampleModal">
-                            Inserir Novo Jogo
-             </button>
+             <input id="grupoactivo" type="hidden" value="0">
+             @foreach( $grupos as $item)
+               <button type="button" class="btn btn-sm btn-info  btn-xs grupo" idg="{{$item->grupo_id}}" >
+
+                            {{ $item->grupo->nome }}
+               </button>
+             @endforeach
           </li>
         </ul>
+       @if(Auth::user()->isinrule(['supermaster']))
+          <ul class="control-sidebar-menu">
+            <li class="text-center">
+               <button type="button" class="btn btn-sm btn-info  btn-sm" data-toggle="modal" data-target="#exampleModal">
+                              Inserir Novo Jogo
+               </button>
+            </li>
+          </ul>
+        @endif
 
       </div>
     

@@ -80,7 +80,7 @@
                                     <th class="text-center">Active</th>
                                   </tr>
                                    @foreach($users as $item)
-                                    @if(!$item->isinrule(['supermaster']))
+                                    
                                         <tr>
                                           <td>#</td>
                                           <td>{{ $item->nome }}</td>
@@ -90,16 +90,18 @@
                                               <td class="text-center"><i class="fa fa-check-circle"></i></td>
                                           @else                       
                                           <td class="text-center"><i class="fa fa-times-circle"></i></td>
-                                          @endif   
-                                          <td><div class="col-xs-1"><a href="{{route('user.edit',$item->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i></a> </div>
-                                              <div class="col-xs-1">
-                                                  {{ Form::open(['route' => ['user.destroy', $item->id], 'method' => 'delete']) }}
-                                                  <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
-                                                  {{ Form::close() }}
-                                              </div>
-                                          </td>
+                                          @endif 
+                                          @if(Auth::user()->isinrule(['supermaster']))  
+                                                <td><div class="col-xs-1"><a href="{{route('user.edit',$item->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i></a> </div>
+                                                    <div class="col-xs-1">
+                                                        {{ Form::open(['route' => ['user.destroy', $item->id], 'method' => 'delete']) }}
+                                                        <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                                                        {{ Form::close() }}
+                                                    </div>
+                                                </td>
+                                          @endif 
                                         </tr>
-                                     @endif   
+                                     
                                     @endforeach
                                 </table>
                               </div>

@@ -15,8 +15,8 @@ class Usergrupo extends Model
     	 return $this->hasMany('App\User', 'id', 'user_id');
     }
 
-      public function grupo(){
+    public function grupo(){
 
-    	 return $this->hasMany('App\Grupo', 'id', 'grupo_id');
+    	 return $this->hasOne('App\Grupo', 'id', 'grupo_id');
     }
 }

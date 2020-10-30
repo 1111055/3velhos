@@ -104,8 +104,7 @@ Route::post('aposta', 'ApostaController@store')->name('aposta');
 
 //classificações
 Route::get('classificacao/getall',                     ['as' => 'classificacao.getall',    'uses' => 'ClassificacoesController@getall']); 
-
-Route::get('password/recovery',                     ['as' => 'password.recovery',    'uses' => 'PassWordController@recovery']); 
+Route::get('password/recovery',                        ['as' => 'password.recovery',    'uses' => 'PassWordController@recovery']); 
 
 Auth::routes();
 

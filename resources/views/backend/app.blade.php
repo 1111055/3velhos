@@ -40,7 +40,7 @@
 <script>
 
  $(document).ready(function() {
-    classificacoes();
+    classificacoes(0);
 });
 
 $('.apptmp').on('click', function(){
@@ -309,9 +309,9 @@ if ($(window).width() < 514) {
 }
 
 
-function classificacoes(){
+function classificacoes(id){
         jQuery('#classifica').html('');
-        $.get("{{ route('classificacao.getall') }}")
+        $.get("{{ route('classificacao.getall') }}?id="+id)
           .done(function( data ) {
 
             data.forEach(function(entry) {
@@ -325,6 +325,15 @@ function classificacoes(){
           });
 
   }
+
+
+$(document).on('click', '.grupo', function(){
+    
+    var id = $(this).attr('idg');
+    $("#sidebr").attr('class', 'control-sidebar control-sidebar-dark');
+    classificacoes(id)
+
+});
 
 </script>
 

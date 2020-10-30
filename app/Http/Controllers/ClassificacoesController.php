@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Classificacao;
+use App\Usergrupo;
+use Illuminate\Support\Facades\Auth;
 
 class ClassificacoesController extends Controller
 {
@@ -27,11 +29,26 @@ class ClassificacoesController extends Controller
         //
     }
 
-    public function getall()
+    public function getall(Request $request)
     {
+       $idgrupo =  request()->id;
+       $user = Auth::user();
 
-        $class = Classificacao::
+        if($idgrupo == 0){
+           $grupo  = Usergrupo::where('user_id', '=',$user->id)->first();
+        }else{
+           $grupo  = Usergrupo::where('user_id', '=',$user->id)->where('grupo_id','=',$idgrupo)->first();
+        }
+
+
+        $grupoallusers = Usergrupo::where('grupo_id', '=',$grupo->grupo_id)->pluck('user_id')->toArray();
+
+      //  dd($grupoallusers);
+
+        $class = Classificacao::whereIn('user_id', $grupoallusers)-> 
                  orderBy('pontos','desc')->get();
+
+       //  dd($class);
 
         foreach ($class as $key => $value) {
             $value['nome'] = $value->utilizador[0]->name;

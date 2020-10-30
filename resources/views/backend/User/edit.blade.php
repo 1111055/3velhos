@@ -92,11 +92,11 @@
                                                 
                                             </div>
                                             <div class="box-footer">
-                                                                        <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Alterar PassWord
-                  </button>
-                                                {!! Form::submit('Guardar',['class' => 'btn btn-info pull-right']) !!}
+                                                                                                  <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                              Alterar PassWord
+                                            </button>
+                                               {!! Form::submit('Guardar',['class' => 'btn btn-info pull-right']) !!}
                                             </div>
                                           {!! Form::close() !!}
                                       </div>

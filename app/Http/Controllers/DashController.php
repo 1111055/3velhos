@@ -9,6 +9,8 @@ use App\Classificacao;
 use App\Jogo;
 use App\Aposta;
 use Carbon\Carbon;
+use App\Grupo;
+use App\Usergrupo;
 
 class DashController extends Controller
 {
@@ -26,7 +28,7 @@ class DashController extends Controller
     {
         $user = Auth::user();
 
-
+        $grupos = Usergrupo::where('user_id','=',$user->id)->get();
       
         $class = Classificacao::
                  orderBy('pontos','desc')->get();
@@ -130,11 +132,11 @@ class DashController extends Controller
          $jogo = $jogo->sortBy('hora');
       
          // dd($jogo);
-//dd($datatmp);
-        $user->authorizeRoles(['master', 'supermaster']);
+        
+        $user->authorizeRoles(['master', 'supermaster','Guest']);
 
 
-        return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp'));
+        return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp','grupos'));
     }
 
 
@@ -254,7 +256,7 @@ class DashController extends Controller
          //dd($datatmp);
         $jogo = $jogo->sortBy('hora');
 
-        $user->authorizeRoles(['master', 'supermaster']);
+        $user->authorizeRoles(['master', 'supermaster','Guest']);
 
 
         return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp'));
