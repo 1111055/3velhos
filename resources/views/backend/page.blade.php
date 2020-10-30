@@ -140,7 +140,7 @@ border-spacing:0px;
                                                 <span class="label label-warning">Cancelado</span>
                                           @endif
                                       </td>
-                                      @if($ck1 != 1)
+                                    
                                          @if($item->resultado == '0')
                                              <td  class="col-xs-1 text-center"> <span class="label label-danger"> S/ Resultado </span></td>
                                          @elseif($item->resultado == '1' || $item->resultado == 'x' || $item->resultado == '2' )
@@ -148,7 +148,7 @@ border-spacing:0px;
                                          @else
                                              <td  class="col-xs-1 text-center"> <span class="label label-warning"> Cancelado </span></td>
                                          @endif
-                                     @endif   
+                                   
                                     </tr>
                               @endforeach
                             </tbody>
