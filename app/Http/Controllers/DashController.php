@@ -155,7 +155,8 @@ class DashController extends Controller
     public function filter(Request $request)
     {
         $user = Auth::user();
-   
+        $grupos = Usergrupo::where('user_id','=',$user->id)->get();
+        
         $datasession =  $request->session()->get('datafilter');       
         $option =  $request->session()->get('opfilter'); 
         $data = $request->data;
@@ -259,7 +260,7 @@ class DashController extends Controller
         $user->authorizeRoles(['master', 'supermaster','Guest']);
 
 
-        return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp'));
+        return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp','grupos'));
 
     }
 
