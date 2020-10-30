@@ -66,7 +66,7 @@
              @endforeach
           </li>
         </ul>
-       @if(Auth::user()->isinrule(['supermaster']))
+       @if(Auth::user()->isinrule(['master']))
           <ul class="control-sidebar-menu">
             <li class="text-center">
                <button type="button" class="btn btn-sm btn-info  btn-sm" data-toggle="modal" data-target="#exampleModal">
