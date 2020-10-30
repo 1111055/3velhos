@@ -15,7 +15,7 @@ class DashController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['page']]);
     }
     /**
      * Display a listing of the resource.
@@ -137,58 +137,28 @@ class DashController extends Controller
         return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp'));
     }
 
-      public function convert12to24($hora)
+
+    public function page()
     {
+      
+        $class = Classificacao::
+                 orderBy('pontos','desc')->get();
+  
 
-        $conversao = $hora;
+         $datatmp = carbon::now()->format('M d');
 
-
-
-        switch ($hora) {
-          case 1:
-           $conversao = 13;
-            break;
-          case 2:
-            $conversao = 14;
-            break;
-          case 3:
-             $conversao = 15;
-            break;
-          case 4:
-            $conversao = 16;
-             break;
-          case 5:
-            $conversao = 17;
-             break;
-          case 6:
-            $conversao = 18;
-             break;
-          case 7:
-            $conversao = 19;
-             break;
-          case 8:
-            $conversao = 20;
-             break;
-          case 9:
-            $conversao = 21;
-             break;
-           case 10:
-            $conversao = 22;
-             break;
-           case 11:
-            $conversao = 23;
-              break;
-           case 12:
-            $conversao = 24;
-              break;
-          default:
-              $hora;
-        }
-
-        return $conversao;
+        $jogo = Jogo::where('data_encontro', '>=', carbon::now()->startOfDay())->where('data_encontro', '<', carbon::now()->addDays(1)->startOfDay())->
+        orderBy('hora','asc')->get();
+           
+  
+        
 
 
+
+        return view('backend.page', compact('class','jogo','datatmp'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -275,14 +245,92 @@ class DashController extends Controller
             }else{
                   $value['_aposta'] = "0";
             }
+
+
+            $horajogo =  $value->hora;
+
+            $splitName = explode(' ', $horajogo); 
+
+            $splitNametwo = explode(':', $splitName[0]); 
+
+            $horajogo =  $splitNametwo[0];
+            $minutosjogo =  $splitNametwo[1];
+
+            if($splitName[1] == "PM"){
+
+                $horajogotmp = $this->convert12to24($splitNametwo[0]);
+                $teste = str_replace($horajogo,$horajogotmp, $value->hora);
+                $testetmp = str_replace("PM",' ', $teste);
+
+            }else{
+
+                $testetmp = str_replace("AM",' ', $value->hora);
+            }
+
+
+            $value->hora = $testetmp;
                    
          }    
          //dd($datatmp);
+        $jogo = $jogo->sortBy('hora');
 
         $user->authorizeRoles(['master', 'supermaster']);
 
 
         return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp'));
+
+    }
+
+    public function convert12to24($hora)
+    {
+
+        $conversao = $hora;
+
+
+
+        switch ($hora) {
+          case 1:
+           $conversao = 13;
+            break;
+          case 2:
+            $conversao = 14;
+            break;
+          case 3:
+             $conversao = 15;
+            break;
+          case 4:
+            $conversao = 16;
+             break;
+          case 5:
+            $conversao = 17;
+             break;
+          case 6:
+            $conversao = 18;
+             break;
+          case 7:
+            $conversao = 19;
+             break;
+          case 8:
+            $conversao = 20;
+             break;
+          case 9:
+            $conversao = 21;
+             break;
+           case 10:
+            $conversao = 22;
+             break;
+           case 11:
+            $conversao = 23;
+              break;
+           case 12:
+            $conversao = 24;
+              break;
+          default:
+              $hora;
+        }
+
+        return $conversao;
+
 
     }
 

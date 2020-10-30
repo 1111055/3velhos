@@ -1,6 +1,11 @@
-@extends('backend.app')
 
-@section('content')
+<!doctype html>
+<html class="no-js" lang="en-US">
+@include('backend.head')
+
+
+<body class="hold-transition skin-blue sidebar-mini" >
+  <div class="wrapper">
 
 
 <style type="text/css">
@@ -84,14 +89,14 @@ border-spacing:0px;
                                   <th class="col-xs-1 text-center">x</th>
                                   <th class="col-xs-2 text-center">Fora</th>
                                   <th>Situação</th>
-                                  @if($ck1!=1) 
-                                     <th class="col-xs-1 text-center">Resultado</th>
-                                  @endif
+                                
+                                  <th class="col-xs-1 text-center">Resultado</th>
+                             
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach( $jogo as $item)
-                                <tr><td colspan="3" class="text-center"><span class="label label-default text-center">{{ $item->hora }}</span></td><td></td>  @if($ck1!=1)<td></td> @endif</tr>
+                                <tr><td colspan="3" class="text-center"><span class="label label-default text-center">{{ $item->hora }}</span></td><td></td>  <td></td> </tr>
                                     <tr>
 
                                       <td class="col-xs-2  text-right">
@@ -183,7 +188,7 @@ border-spacing:0px;
           <span aria-hidden="true">&times;</span>
         </button>
       </div> 
-      <form name="formsend" method="POST" action="{{route('jogo.newgame')}}">
+      <form name="formsend" method="POST" action="#">
         <div class="modal-body">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
        
@@ -234,7 +239,7 @@ border-spacing:0px;
       </div> 
        <form name="formsendgame" method="POST" action="">
         <div class="modal-body">
-              <input type="hidden" id="rota" name="rota" value="{{route('aposta')}}">
+              <input type="hidden" id="rota" name="rota" value="#">
               <input type="hidden" id="jogo_id" name="jogo_id" value="">
               <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
@@ -265,9 +270,8 @@ border-spacing:0px;
           <span aria-hidden="true">&times;</span>
         </button>
       </div> 
-       <form name="formsendaposta" method="POST" action="{{route('jogo.closebet')}}">
+       <form name="formsendaposta" method="POST" action="#">
         <div class="modal-body">
-              <input type="hidden" id="user_id" name="user_id" value="{{$userId}}">
               <input type="hidden" id="jogoid" name="jogoid" value="">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
@@ -291,6 +295,8 @@ border-spacing:0px;
 </div>
 
 
-@stop
-
-@include('backend.rightsite')
+  
+            @include('backend.footer')
+            
+  </div>
+</body>

@@ -20,7 +20,8 @@ class JogoTableSeed extends Seeder
             'situacao' => 0,
             'resultado' => '0',
             'created_at' =>  Carbon::now(),
-            'updated_at' =>  Carbon::now()
+            'updated_at' =>  Carbon::now(),
+            'hora' =>  '09:00 PM'
         ]);
     }
 }

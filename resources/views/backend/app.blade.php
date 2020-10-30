@@ -12,8 +12,9 @@
 
 	
 		       	@include('backend.footer')
-            @include('backend.rightsite')
+            
 	</div>
+</body>
 
     <!-- REQUIRED JS SCRIPTS -->
 
@@ -299,12 +300,12 @@ if ($(window).width() < 514) {
     $('#bodyarrow').attr('class', 'container col-xs-12');
     $('#Classificacaoclass').attr('class', 'container col-xs-12');
     $('#jogoclass').attr('class', ' container col-xs-12');
-    $('#filterclass').attr('class', 'container col-xs-12');
+
 } else {
     $('#bodyarrow').attr('class', 'container col-xs-4');
     $('#jogoclass').attr('class', 'container col-xs-8');
     $('#Classificacaoclass').attr('class', 'container col-xs-4');
-    $('#filterclass').attr('class', 'container col-xs-8');
+
 }
 
 
@@ -326,3 +327,5 @@ function classificacoes(){
   }
 
 </script>
+
+ @yield('scripts')

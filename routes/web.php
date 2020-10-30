@@ -23,6 +23,7 @@ Route::get('dash/piechart', 'DashController@piechart')->name('piechart');
 Route::get('dash/piechart/{id}/{tipo}',                ['as' => 'dash.piechart',    'uses' => 'DashController@piechart']); 
 Route::get('dash/mapschar/{id}/{tipo}',    ['as' => 'dash.mapschar',    'uses' => 'DashController@mapschar']); 
 Route::get('dash/userschar/{id}/{tipo}',   ['as' => 'dash.userschar',   'uses' => 'DashController@userschar']); 
+Route::get('/page',   ['as' => 'dash.page',   'uses' => 'DashController@page']); 
 
 
 
@@ -55,6 +56,21 @@ Route::put('expressoes/update/{id}',         ['as' => 'expressoes.update',  'use
 Route::delete('expressoes/destroy/{id}',     ['as' => 'expressoes.destroy', 'uses' => 'ExpressoesController@destroy']);
 Route::post('expressoes', 'ExpressoesController@store');
 
+
+//Grupos
+Route::get('grupos', 'GrupoController@index')->name('grupos');
+Route::get('grupos/edit/{id}',           ['as' => 'grupos.edit',    'uses' => 'GrupoController@edit']); 
+Route::put('grupos/update/{id}',         ['as' => 'grupos.update',  'uses' => 'GrupoController@update']);
+Route::delete('grupos/destroy/{id}',     ['as' => 'grupos.destroy', 'uses' => 'GrupoController@destroy']);
+Route::post('grupos', 'GrupoController@store');
+
+
+//Utilizadores e Grupos
+Route::get('usergrupos', 'UsergruposController@index')->name('usergrupos');
+Route::get('usergrupos/edit/{id}',           ['as' => 'usergrupos.edit',    'uses' => 'UsergrupoController@edit']); 
+Route::put('usergrupos/update/{id}',         ['as' => 'usergrupos.update',  'uses' => 'UsergrupoController@update']);
+Route::delete('usergrupos/destroy/{id}',     ['as' => 'usergrupos.destroy', 'uses' => 'UsergrupoController@destroy']);
+Route::post('usergrupos', 'UsergrupoController@store');
 
 
 

@@ -11,7 +11,7 @@
                     Regras
                   </h1>
                   <ol class="breadcrumb">
-                    <li><a href="{{route('dash')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active"><a href="{{route('role')}}"><i class="fa fa-gavel"></i> Regras</a></li>
                   </ol>
                 </section>
