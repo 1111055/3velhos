@@ -300,3 +300,29 @@ border-spacing:0px;
             
   </div>
 </body>
+    <script src="{{ asset('backend/bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script>
+
+ $(document).ready(function() {
+    classificacoes();
+    alert();
+});
+
+function classificacoes(){
+        jQuery('#classifica').html('');
+        $.get("{{ route('classificacao.getall') }}")
+          .done(function( data ) {
+
+            data.forEach(function(entry) {
+             console.log(entry);
+
+             var html =  "<li class='item'><div class='product-info'><a href='javascript:void(0)' class='product-title'>"+ entry['nome'] +"<span class='label label-success pull-right'>"+ entry['pontos'] +"</span></a></div></li>";
+
+             $( "#classifica" ).append(html);
+            });
+                     
+          });
+
+  }
+
+</script>
