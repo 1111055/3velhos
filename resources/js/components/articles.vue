@@ -2,7 +2,16 @@
 	
 
 				<div>
-					
+					         <div class="box box-primary" v-for="item in articles">
+                          
+                              <div class="box-header with-border">
+                                <h3 class="box-title">{{ item.title }}</h3>
+                              </div>
+
+                              <div class="box-body">
+                                
+                              </div>
+                            </div>
 					
 			        <div class="blog-list-item" v-for="item in articles">
 			            <!--blogmage--> 

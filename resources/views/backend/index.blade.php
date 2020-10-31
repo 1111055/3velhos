@@ -126,11 +126,15 @@ border-spacing:0px;
                                           @if($item->situacao == 1)
                                             <span class="label label-danger">Jogo Fechado</span>
                                           @elseif($item->situacao == 0)
+                                            @if(Auth::user()->isinrule(['master']))
                                             <div id="fec{{ $item->id }}">
                                               <button type="button"  idjogo="{{ $item->id }}" class="btn btn-sm btn-success btn-flat fechar">
                                                       Fechar Jogo
                                               </button>
                                             </div>
+                                             @else
+                                                    <span class="label label-success">A decorrer</span>
+                                             @endif
                                           @else
                                                 <span class="label label-warning">Cancelado</span>
                                           @endif

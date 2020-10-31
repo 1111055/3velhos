@@ -10,8 +10,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="cover-text mt-5">
-                    <h2 class="text-white mb-2">{{ $exp[1]['expression'] }}</h2>
-                    <p class="text-white">{{ $exp[3]['expression'] }}</p>
+                    <h2 class="text-white mb-2"></h2>
+                    <p class="text-white"></p>
                     <div class="page_nav">
                         <span>Home <span class="third-color"><i class="fa fa-angle-double-right"></i> Blog</span>
                     </div>
@@ -23,7 +23,7 @@
 <!--Cover End-->
 
 <!--Page Content-->
-<div id="app">
+<div id="apppp">
 
 <section >
     <div class="container">
@@ -46,7 +46,7 @@
                 </div>
                 <!--recent post-->
                 <div class="widget bg-light">
-                    <h5 class="mb-4">{{ $exp[10]['expression'] }}</h5>
+                    <h5 class="mb-4"></h5>
                     <!--recent post item-->
                     @foreach($art['data'] as $key => $value)
                             <div class="recent-post d-flex">
@@ -60,7 +60,7 @@
                 </div>
                 <!--category-->
                 <div class="widget bg-light">
-                    <h5 class="mb-4">{{ $exp[11]['expression'] }}</h5>
+                    <h5 class="mb-4"></h5>
                      <ul class="list-unstyled blog-category m-0 alt-font">
                         @foreach($cat2 as $key => $value)
                           <li><a href="{{ route('articles.categoria', $value['id']) }}">{{$value['titulo']}} <span class="float-right">{{$value['qtd']}}</span></a></li>

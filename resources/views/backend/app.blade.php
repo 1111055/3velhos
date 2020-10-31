@@ -36,6 +36,8 @@
     <script src="{{ asset('backend/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
     <script src="{{ asset('backend/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
 
+         <script src="{{asset('public/js/app.js')}}"></script>
+
 
 <script>
 

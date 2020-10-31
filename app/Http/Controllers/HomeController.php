@@ -36,6 +36,18 @@ class HomeController extends Controller
        $cat2 = Categoriablog::getListsort();
 
 
+       return view('backend.article',compact('art','cat2'));
+    }
+    public function front()
+    {
+
+      
+
+       $art = Article::where('activo','=','1')->orderBy('created_at','desc')->paginate(5)->toArray();       
+
+       $cat2 = Categoriablog::getListsort();
+
+
        return view('frontend.index',compact('art','cat2'));
     }
 
