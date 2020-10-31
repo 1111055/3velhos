@@ -19,6 +19,8 @@
     <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 3 -->
+
+      <script src="{{asset('public/js/app.js')}}"></script>
     <script src="{{ asset('backend/bower_components/jquery/dist/jquery.min.js') }}"></script>
 
      <script src="https://kit.fontawesome.com/e2c9ee503e.js" crossorigin="anonymous"></script>
@@ -36,7 +38,7 @@
     <script src="{{ asset('backend/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
     <script src="{{ asset('backend/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
 
-         <script src="{{asset('public/js/app.js')}}"></script>
+
 
 
 <script>
