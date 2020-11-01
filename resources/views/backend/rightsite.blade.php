@@ -58,6 +58,9 @@
         <ul class="control-sidebar-menu">
           <li class="text-center">
              <input id="grupoactivo" type="hidden" value="0">
+              <button type="button" class="btn btn-sm btn-info  btn-xs grupo" idg="-1" >
+                        Geral
+               </button>
              @foreach( $grupos as $item)
                <button type="button" class="btn btn-sm btn-info  btn-xs grupo" idg="{{$item->grupo_id}}" >
 
