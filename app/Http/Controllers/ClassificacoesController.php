@@ -33,21 +33,29 @@ class ClassificacoesController extends Controller
     {
        $idgrupo =  request()->id;
        $user = Auth::user();
+       $todos = false;
 
-        if($idgrupo == 0){
+        if($idgrupo == -1){
+            $todos = true;
+        }elseif($idgrupo == 0){
            $grupo  = Usergrupo::where('user_id', '=',$user->id)->first();
         }else{
            $grupo  = Usergrupo::where('user_id', '=',$user->id)->where('grupo_id','=',$idgrupo)->first();
         }
 
-
-        $grupoallusers = Usergrupo::where('grupo_id', '=',$grupo->grupo_id)->pluck('user_id')->toArray();
-
+       if($idgrupo != -1){
+           $grupoallusers = Usergrupo::where('grupo_id', '=',$grupo->grupo_id)->pluck('user_id')->toArray();
+        }
       //  dd($grupoallusers);
 
-        $class = Classificacao::whereIn('user_id', $grupoallusers)-> 
+        if($todos == false){
+            $class = Classificacao::whereIn('user_id', $grupoallusers)-> 
+                     orderBy('pontos','desc')->get();
+        }else{
+             $class = Classificacao:: 
                  orderBy('pontos','desc')->get();
 
+        }
        //  dd($class);
 
         foreach ($class as $key => $value) {
