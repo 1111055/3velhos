@@ -58,9 +58,9 @@ class DashController extends Controller
         $ck2 = 0; $ck3 = 0;$ck1 = 0;$ck0 = 0;
  
         if(!$request->op1 && !$request->op2 && !$request->op3 && !$request->op0){
-             $jogo =  $jogo->where('situacao','=','0');
-             $ck1 = 1; 
-              $request->session()->put('opfilter', 1);
+            // $jogo =  $jogo->where('situacao','=','0');
+              $ck0 = 1; 
+              $request->session()->put('opfilter', 0);
         }else{
             if($request->op0){
                 $ck2 = 0; $ck3 = 0;$ck1 = 0;$ck0 = 1;
@@ -99,9 +99,42 @@ class DashController extends Controller
             if($exist != null){
                //  dd($exist);
                  $value['_aposta'] = $exist->aposta;
+
+                  $result = "Empate";
+
+                 if($value->resultado == 1){
+                      $result = "Terminado, vencedor: ".$value->eq1;
+                 }
+                  if($value->resultado == 2){
+                      $result = "Terminado, vencedor: ".$value->eq2;
+                 }
+
+
+                 if($exist->aposta == $value->resultado){
+                           $value['classaposta'] = "success";
+                           $value['vencedor']    =  "<span class='label label-default'>".$result."</span> <i class='fa fa-thumbs-up'></i>";
+
+                 }else{
+                           $value['classaposta'] = "danger";
+                           $value['vencedor']    =  "<span class='label label-default'>".$result."</span><i class='fa fa-thumbs-down'></i>";
+                 }
+
+            
             }else{
                   $value['_aposta'] = "0";
+                   $value['classaposta'] = "default";
             }
+
+            if($value->situacao == 0){
+
+                 $value['vencedor']    =  "<span class='label label-default'>Aberto</span><i class='fa fa-smile'></i>";
+
+             }
+               if($value->cancelado == 1){
+
+                 $value['vencedor']    =  "<span class='label label-default'>Cencelado</span><i class='fa fa-frown-o'></i>";
+
+             }
 
             $horajogo =  $value->hora;
 

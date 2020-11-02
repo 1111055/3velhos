@@ -42,7 +42,7 @@ table#mytable,
 table#mytable td
 {
     border: none !important;
-    padding:2px; 
+    padding:4px; 
     border-width:0px; 
     margin:0px; 
 }
@@ -80,18 +80,37 @@ border-spacing:0px;
                           <table class="table no-margin" id="mytable" cellspacing="0" cellpadding="0">
                             <thead>
                                 <tr>
-                                  <th class="col-xs-2 text-center">Casa</th>
+                                  <th class="col-xs-5 text-center">Casa</th>
                                   <th class="col-xs-1 text-center">x</th>
-                                  <th class="col-xs-2 text-center">Fora</th>
-                                  <th>Situação</th>
-                                  @if($ck1!=1) 
-                                     <th class="col-xs-1 text-center">Resultado</th>
-                                  @endif
+                                  <th class="col-xs-5 text-center">Fora</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach( $jogo as $item)
-                                <tr><td colspan="3" class="text-center"><span class="label label-default text-center">{{ $item->hora }}</span></td><td></td>  @if($ck1!=1)<td></td> @endif</tr>
+
+                                <tr><td colspan="3" class="text-cente {{ $item->classaposta }}" >
+                                        <div class="col-xs-10">
+                                           
+                                                  {!! $item->vencedor !!}
+                                                  
+                                               @if($item->situacao == 0 && $item->cancelado == 0)
+                                                  @if(Auth::user()->isinrule(['master']))
+                                                  <div id="fec{{ $item->id }}">
+                                                    <button type="button"  idjogo="{{ $item->id }}" class="btn btn-sm btn-xs btn-success btn-flat fechar">
+                                                            Fechar Jogo
+                                                    </button>
+                                                  </div>
+                                                   @else
+                                                     <span class="label label-info" style="margin-top: 1%;">A decorrer</span>
+                                                   @endif
+                                               @endif
+                                             
+                                          </div>
+                                        <div class="col-xs-2" style="margin-top: 1%;">
+                                        <span class="label label-default  text-center">{{ $item->hora }}</span>
+                                      </div>
+                                    </td>
+                                  <td></td>  @if($ck1!=1)<td></td> @endif</tr>
                                     <tr>
 
                                       <td class="col-xs-2  text-right">
@@ -121,33 +140,7 @@ border-spacing:0px;
                                            <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-default btn-sm apptmp">{{ $item->eq2 }}</button>
                                          @endif
                                       </td>
-                                      
-                                      <td>
-                                          @if($item->situacao == 1)
-                                            <span class="label label-danger">Jogo Fechado</span>
-                                          @elseif($item->situacao == 0)
-                                            @if(Auth::user()->isinrule(['master']))
-                                            <div id="fec{{ $item->id }}">
-                                              <button type="button"  idjogo="{{ $item->id }}" class="btn btn-sm btn-success btn-flat fechar">
-                                                      Fechar Jogo
-                                              </button>
-                                            </div>
-                                             @else
-                                                    <span class="label label-success">A decorrer</span>
-                                             @endif
-                                          @else
-                                                <span class="label label-warning">Cancelado</span>
-                                          @endif
-                                      </td>
-                                      @if($ck1 != 1)
-                                         @if($item->resultado == '0')
-                                             <td  class="col-xs-1 text-center"> <span class="label label-danger"> S/ Resultado </span></td>
-                                         @elseif($item->resultado == '1' || $item->resultado == 'x' || $item->resultado == '2' )
-                                             <td  class="col-xs-1 text-center"> <span class="label label-success"> {{ $item->resultado }} </span></td>
-                                         @else
-                                             <td  class="col-xs-1 text-center"> <span class="label label-warning"> Cancelado </span></td>
-                                         @endif
-                                     @endif   
+
                                     </tr>
                               @endforeach
                             </tbody>

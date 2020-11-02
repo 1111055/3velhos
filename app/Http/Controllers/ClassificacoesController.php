@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Classificacao;
 use App\Usergrupo;
+use App\Jogo;
+use App\Aposta;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ClassificacoesController extends Controller
 {
@@ -49,9 +52,20 @@ class ClassificacoesController extends Controller
       //  dd($grupoallusers);
 
         if($todos == false){
+
+            $now = Carbon::now();
+            
+            $mes = $now->month;
+
+             $apostastmp = Aposta::whereMonth('created_at', '=', $mes) ;
+
+        //     dd($apostastmp);  
+
             $class = Classificacao::whereIn('user_id', $grupoallusers)-> 
                      orderBy('pontos','desc')->get();
         }else{
+
+
              $class = Classificacao:: 
                  orderBy('pontos','desc')->get();
 
