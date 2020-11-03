@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Jogo;
 use App\Aposta;
 use App\Classificacao;
+use App\Article;
 
 
 
@@ -121,19 +122,108 @@ class JogoController extends Controller
          }
 
          $bet->save();
+
+
+         $vit = $bet->resultado == "1" ? "vitória do ".$bet->eq1 : "vitória do ".$bet->eq2;
+
+         if($bet->resultado == "x"){
+                 $vit = "o jogo acabou empatado.";
+         }
+
+          $class = Classificacao:: 
+                 orderBy('pontos','desc')->get();
+
+          $totalap = Aposta::where('aposta', '=', $bet->resultado)->where('jogo_id', '=', $id)->get();
+
+          $html = count($totalap)." Pessoas acertaram neste resultado.<br/><br/>";
+
+          
+          $html2 = "Tabela Classificativa<br/>";
+
+          $html1 =   "<table class='table'>
+                      <tbody>";
+                        foreach ($class as $key => $value) {
+                               $html1 =  $html1."<tr>
+                                          <td>".$value->utilizador[0]->name."</td><td>".$value->pontos."</td>
+                                        </tr>";
+                        }
+                       
+            $html1 = $html1."</tbody></table>";
+
+            $html =  $html.$html2.$html1;
+
+            if($bet->cancelado == 1){$html = $bet->eq1." x ".$bet->eq2.". Este jogo foi cancelado!"; $vit = "Cancelado";}
+
+           Article::create([
+                'title'    => "Jogo Fechado, ". $vit,
+                'body'     => $html, 
+                'activo'   => 1
+                
+            ]); 
+
+
+
+
          return response()->json(0);
     }
 
     public function newgame(Request $request)
     {
-         Jogo::create([
-            'eq1'           => request()->eq1,
-            'eq2'           => request()->eq2,
-            'data_encontro' => request()->data_encontro,
-            'hora'          => request()->hora,
-            'situacao'      => 0,
-            'resultado'     => 0,
-        ]);
-         return response()->json(0);
+
+
+         $countjogos = Jogo::where('data_encontro', '=', request()->data_encontro)->where('cancelado', '=', 0)->get();
+
+        //dd(count($countjogos));
+
+         if(count($countjogos) == 8){
+
+
+
+
+              return response()->json(1);
+         }else{
+
+                 Jogo::create([
+                    'eq1'           => request()->eq1,
+                    'eq2'           => request()->eq2,
+                    'data_encontro' => request()->data_encontro,
+                    'hora'          => request()->hora,
+                    'situacao'      => 0,
+                    'resultado'     => 0,
+                ]);
+
+              
+           
+                $countjogostmp = Jogo::where('data_encontro', '=', request()->data_encontro)->where('cancelado', '=', 0)->get();
+
+                  if( count($countjogostmp) == 8){
+                      $game = Jogo::where('cancelado','=','0')->orderBy('id', 'desc')->take(8)->get();
+
+
+                      $html = "Estão inseridos novos jogos. Boa Sorte. <br/><br/>";
+
+
+                      $html =  $html."<table class='table'>
+                                  <tbody>";
+                                    foreach ($game as $key => $value) {
+                                           $html =  $html."<tr>
+                                                      <td>".$value->eq1."</td><td>x</td><td>".$value->eq1."</td>
+                                                    </tr>";
+                                    }
+                                   
+                       $html = $html."</tbody></table>";
+
+            
+              
+                       Article::create([
+                            'title'    => "Novos Jogos Disponiveis",
+                            'body'     => $html, 
+                            'activo'   => 1
+                            
+                        ]); 
+                  }
+
+           return response()->json(0);
+        }
     }
 }

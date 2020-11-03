@@ -8,6 +8,7 @@ use App\Jogo;
 use App\Http\Requests\ApostaRequest;
 use Carbon\Carbon;
 
+
 class ApostaController extends Controller
 {
     /**
@@ -57,7 +58,8 @@ class ApostaController extends Controller
 
                  $value->aposta  = request()->aposta;
                  $value->save();
-            }
+            }               
+
 
              return response()->json(0);
         }else{

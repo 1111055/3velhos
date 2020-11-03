@@ -119,7 +119,12 @@ $("form[name='formsend']").submit(function (e) {
         type: request_method,
         data: form_data
     }).done(function (response) {
-      alert('Guardado com Sucesso!');
+      if(response == 0){
+          alert('Guardado com Sucesso!');
+      }  
+      if(response == 1){
+          alert('Já existem 8 jogos');
+      }
    // var url      = window.location.href; 
       window.location.href=window.location.href;
     //alert(url);

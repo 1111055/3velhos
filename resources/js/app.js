@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('articles', require('./components/articles.vue').default);
 Vue.component('categoria', require('./components/categoria.vue').default);
+Vue.component('InfiniteLoading', require('vue-infinite-loading'));
 
 Vue.component(
     'passport-clients',
