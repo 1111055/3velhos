@@ -66,7 +66,7 @@ export default{
 		//	var link = 'https://blog.feelbit.pt/api/articles';
 
 		//	if(res[0] === 'http:'){
-				var link = 'http://localhost/3velhos/api/articles';
+				var link = 'http://velhos3.herokuapp.com/api/articles';
 		//	}
 			page_url = page_url || link
 			fetch(page_url)
@@ -80,7 +80,7 @@ export default{
 		},
 		infiniteHandler($state) {
      
-                 	fetch('http://localhost/3velhos/api/articles?page='+this.page)
+                 	fetch('http://velhos3.herokuapp.com/api/articles?page='+this.page)
 
                     .then(response => {
                         return response.json();
