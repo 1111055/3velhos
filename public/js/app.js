@@ -1932,7 +1932,7 @@ __webpack_require__.r(__webpack_exports__);
       var res = window.location.href.split("/"); //	var link = 'https://blog.feelbit.pt/api/articles';
       //	if(res[0] === 'http:'){
 
-      var link = 'http://localhost/3velhos/api/articles'; //	}
+      var link = 'http://velhos3.herokuapp.com/api/articles'; //	}
 
       page_url = page_url || link;
       fetch(page_url).then(function (res) {
@@ -1947,7 +1947,7 @@ __webpack_require__.r(__webpack_exports__);
     infiniteHandler: function infiniteHandler($state) {
       var _this2 = this;
 
-      fetch('http://localhost/3velhos/api/articles?page=' + this.page).then(function (response) {
+      fetch('http://velhos3.herokuapp.com/api/articles?page=' + this.page).then(function (response) {
         return response.json();
       }).then(function (data) {
         console.log(data);
