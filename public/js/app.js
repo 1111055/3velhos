@@ -1928,7 +1928,7 @@ __webpack_require__.r(__webpack_exports__);
     infiniteHandler: function infiniteHandler($state) {
       var _this = this;
 
-      fetch('http://localhost/3velhos/api/articles?page=' + this.page).then(function (response) {
+      fetch('http://velhos3.herokuapp.com/api/articles?page=' + this.page).then(function (response) {
         return response.json();
       }).then(function (data) {
         console.log(data);
