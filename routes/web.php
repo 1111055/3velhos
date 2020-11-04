@@ -13,12 +13,10 @@
 
 //teste email..
 
-Route::get('/', 'DashController@index');
-Route::get('home', 'DashController@index')->name('home');
+Route::get('/', 'HomeController@index');
 
-Route::get('hometeste', 'HomeController@index')->name('hometeste');
+Route::get('news', 'HomeController@index')->name('news');
 
-Route::get('hometeste3', 'HomeController@front')->name('hometeste3');
 
 
 //Route::post('home', 'DashController@index');
@@ -30,7 +28,8 @@ Route::get('dash/piechart/{id}/{tipo}',                ['as' => 'dash.piechart',
 Route::get('dash/mapschar/{id}/{tipo}',    ['as' => 'dash.mapschar',    'uses' => 'DashController@mapschar']); 
 Route::get('dash/userschar/{id}/{tipo}',   ['as' => 'dash.userschar',   'uses' => 'DashController@userschar']); 
 
-
+Route::get('plataform', 'DashController@index')->name('plataform');
+Route::get('home', 'DashController@index')->name('home');
 
 //Menu
 Route::get('menu', 'MenuController@index')->name('menu');

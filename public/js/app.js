@@ -1921,9 +1921,6 @@ __webpack_require__.r(__webpack_exports__);
       edit: false
     };
   },
-  created: function created() {
-    this.fetchArticles();
-  },
   methods: {
     infiniteHandler: function infiniteHandler($state) {
       var _this = this;

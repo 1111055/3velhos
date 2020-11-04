@@ -54,10 +54,6 @@ export default{
 		}
 	},
 
-	created() {
-			this.fetchArticles();
-	},
-
 	methods: {
 
 		infiniteHandler($state) {
