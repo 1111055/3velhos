@@ -59,28 +59,10 @@ export default{
 	},
 
 	methods: {
-		fetchArticles(page_url){
-			let vm = this;
-			var res = window.location.href.split("/");
-			
-		//	var link = 'https://blog.feelbit.pt/api/articles';
 
-		//	if(res[0] === 'http:'){
-				var link = 'http://velhos3.herokuapp.com/api/articles';
-		//	}
-			page_url = page_url || link
-			fetch(page_url)
-			.then(res => res.json())
-			.then(res => {
-				this.articles = res['data'];
-
-				vm.makePagination(res.meta, res.links);
-			})
-			.catch(err => console.log(err));
-		},
 		infiniteHandler($state) {
      
-                 	fetch('http://velhos3.herokuapp.com/api/articles?page='+this.page)
+                 	fetch('http://localhost/3velhos/api/articles?page='+this.page)
 
                     .then(response => {
                         return response.json();

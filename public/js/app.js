@@ -1925,29 +1925,10 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchArticles();
   },
   methods: {
-    fetchArticles: function fetchArticles(page_url) {
+    infiniteHandler: function infiniteHandler($state) {
       var _this = this;
 
-      var vm = this;
-      var res = window.location.href.split("/"); //	var link = 'https://blog.feelbit.pt/api/articles';
-      //	if(res[0] === 'http:'){
-
-      var link = 'http://velhos3.herokuapp.com/api/articles'; //	}
-
-      page_url = page_url || link;
-      fetch(page_url).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        _this.articles = res['data'];
-        vm.makePagination(res.meta, res.links);
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    },
-    infiniteHandler: function infiniteHandler($state) {
-      var _this2 = this;
-
-      fetch('http://velhos3.herokuapp.com/api/articles?page=' + this.page).then(function (response) {
+      fetch('http://localhost/3velhos/api/articles?page=' + this.page).then(function (response) {
         return response.json();
       }).then(function (data) {
         console.log(data);
@@ -1957,7 +1938,7 @@ __webpack_require__.r(__webpack_exports__);
           $.each(data.data, function (key, value) {
             console.log(value);
 
-            _this2.articles.push(value);
+            _this.articles.push(value);
           });
           $state.loaded();
         } else {
@@ -1976,7 +1957,7 @@ __webpack_require__.r(__webpack_exports__);
       this.pagination = pagination;
     },
     deleteArticle: function deleteArticle($id) {
-      var _this3 = this;
+      var _this2 = this;
 
       if (confirm("Tem a certeza?")) {
         var link = '/api/articles/' + $id;
@@ -1987,7 +1968,7 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (data) {
           alert('Removido com sucesso');
 
-          _this3.fetchArticles();
+          _this2.fetchArticles();
         })["catch"](function (err) {
           return console.log(err);
         });

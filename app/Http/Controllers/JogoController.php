@@ -124,10 +124,10 @@ class JogoController extends Controller
          $bet->save();
 
 
-         $vit = $bet->resultado == "1" ? "vitória do ".$bet->eq1 : "vitória do ".$bet->eq2;
+         $vit = $bet->resultado == "1" ? "Jogo: ".$bet->eq1." x ".$bet->eq2." vitória do ".$bet->eq1 : "vitória do ".$bet->eq2;
 
          if($bet->resultado == "x"){
-                 $vit = "o jogo acabou empatado.";
+                 $vit = "O jogo ".$bet->eq1." x ".$bet->eq2." acabou empatado.";
          }
 
           $class = Classificacao:: 
@@ -135,7 +135,7 @@ class JogoController extends Controller
 
           $totalap = Aposta::where('aposta', '=', $bet->resultado)->where('jogo_id', '=', $id)->get();
 
-          $html = count($totalap)." Pessoas acertaram neste resultado.<br/><br/>";
+          $html = count($totalap)." Pessoas acertaram no jogo ". $bet->eq1." x ".$bet->eq2." neste resultado.<br/><br/>";
 
           
           $html2 = "Tabela Classificativa<br/>";
