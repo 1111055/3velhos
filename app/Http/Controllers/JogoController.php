@@ -207,7 +207,7 @@ class JogoController extends Controller
                                   <tbody>";
                                     foreach ($game as $key => $value) {
                                            $html =  $html."<tr>
-                                                      <td>".$value->eq1."</td><td>x</td><td>".$value->eq1."</td>
+                                                      <td>".$value->eq1."</td><td>x</td><td>".$value->eq2."</td>
                                                     </tr>";
                                     }
                                    
