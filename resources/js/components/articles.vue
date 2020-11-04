@@ -54,6 +54,7 @@ export default{
 		}
 	},
 
+
 	methods: {
 
 		infiniteHandler($state) {

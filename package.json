@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "cors": "^2.8.5",
         "vue-infinite-loading": "^2.4.5"
     }
 }
