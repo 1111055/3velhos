@@ -62,7 +62,7 @@ export default{
 
 		infiniteHandler($state) {
      
-                 	fetch('http://localhost/3velhos/api/articles?page='+this.page)
+                 	fetch('http://velhos3.herokuapp.com/api/articles?page='+this.page)
 
                     .then(response => {
                         return response.json();
