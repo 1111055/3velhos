@@ -96,7 +96,7 @@ class JogoController extends Controller
          $bet = Jogo::find($id);
 
 
-
+ if($bet->situacao == 0){
          $exist = Aposta::where('jogo_id', '=', $id)->get();
 
          if($resultado != 3 && $resultado != "Cancelado"){
@@ -165,6 +165,9 @@ class JogoController extends Controller
 
 
          return response()->json(0);
+     }else{
+          return response()->json(1);
+     }
     }
 
     public function newgame(Request $request)
