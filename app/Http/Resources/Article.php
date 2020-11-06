@@ -31,7 +31,8 @@ class Article extends JsonResource
                 'path'         => $this->path,
                 'created_at'   => $createdAt->format('d M Y'),
                 'category'     => $this->categoriablog != null ? $this->categoriablog->titulo : 0,
-                'link'         =>  $link 
+                'link'         =>  $link,
+                'fonte'         =>  $this->fonte, 
 
             ];
 
@@ -42,7 +43,7 @@ class Article extends JsonResource
             return [
 
                    'version' => '1.0.0',
-                   'author'  => 'FeelBit'     
+                   'author'  => '3Velhos'     
             ];
 
     }

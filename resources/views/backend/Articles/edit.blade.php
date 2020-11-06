@@ -10,7 +10,7 @@
                    Editar Noticias
                   </h1>
                   <ol class="breadcrumb">
-                    <li><a href="{{route('dash')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li><a href="{{route('articles.list')}}"><i class="fa fa-align-justify"></i> Noticias</a></li>
                     <li><a href="{{route('articles.edit', $article->id)}}"><i class="fa fa-align-justify"></i> Editar Noticias</a></li>
                   </ol>
@@ -62,6 +62,12 @@
                                         </div>
                                       </div>
                                       <div class="form-group">
+                                          {!! Form::label('* Fonte:',null, ['class' => 'col-sm-2 control-label']) !!}
+                                        <div class="col-sm-8">
+                                           {!! Form::text('fonte',$article->fonte,['class' => 'form-control']) !!}
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
                                           {!! Form::label('Activo:',null, ['class' => 'col-sm-2 control-label']) !!}
                                         <div class="col-sm-4">
                                            {!! Form::checkbox('activo',1,$article->activo) !!}
@@ -75,40 +81,7 @@
                                       </div>
 
 
-                                        <div class="col-xs-12" style="display: none;" id="emailshow">
-                                            <div class="box">
-                                             <div class="panel panel-default">
-                                               <div class="panel-body">
-                                                <div class="box box-info">
 
-                                                  
-                                                    
-                                                    <div class="col-sm-6">
-                                                         <div class="form-group">
-                                                            {!! Form::label('* Layout:',null, ['class' => 'col-sm-2 control-label']) !!}
-                                                            <select class="form-control" name="emailsend" >
-                                                              <option value="0">Selecionar uma Lista de contactos</option>
-
-                                                              @foreach($campains as $item)
-                                                                 <option value="{{$item['id']}}">{{$item['name']  !== '' ? $item['name']  : ''}}</option>
-                                                              @endforeach
-                                                            </select>
-                                                         </div>
- 
-                                                    </div>
-                                                      <div class="col-sm-1">                                                  
-                                                         <div class="form-group">
-                                                            {!! Form::label('Novo',null, ['class' => 'col-sm-2 control-label']) !!}
-                                                            <button type="button" class="btn btn-primary form-control"><i class="fas fa-plus-circle"></i></button>
-                                                         </div>
-                                                    </div>
-                                                   
-                                                    </div>
-                                                </div>
-                                               </div>
-                                            </div>
-                                            </div>
-                                        </div>
 
 
                                       <div class="form-group">

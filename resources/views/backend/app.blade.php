@@ -201,25 +201,30 @@ $("form[name='formsendaposta']").submit(function (e) {
             data: form_data
         }).done(function (response) {
 
-        classificacoes();
-        $('#resultadotmp').modal('toggle');
-        $( '#showsucess').text( "!! Guardado Com Sucesso " );
-        $('#showsucess').show();
+            if(response == 0){
+                classificacoes();
+                $('#resultadotmp').modal('toggle');
+                $( '#showsucess').text( "!! Guardado Com Sucesso " );
+                $('#showsucess').show();
 
-        setTimeout(function(){ 
+                setTimeout(function(){ 
 
-                var link = "#fec".concat(game);
-                $(link).find('.fechar').remove();
+                        var link = "#fec".concat(game);
+                        $(link).find('.fechar').remove();
 
-               $('#showsucess').text("");
-               $('#showsucess').hide();
-               var text = '<span class="label label-danger">Jogo Fechado</span>';
-                $('#resultadotp').prop('selectedIndex',0);
+                       $('#showsucess').text("");
+                       $('#showsucess').hide();
+                       var text = '<span class="label label-danger">Jogo Fechado</span>';
+                        $('#resultadotp').prop('selectedIndex',0);
 
-               $(link).html(text);
+                       $(link).html(text);
 
-         }, 1500);
-            
+                 }, 1500);
+              }else{
+                alert("Já se encontra fechado.")
+                 window.location.href=window.location.href;
+              }
+                    
         });
     }else{
         $('#resultadotmp').modal('toggle');

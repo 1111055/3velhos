@@ -124,5 +124,20 @@ Route::get('articles/show/{id}',           ['as' => 'articles.show',       'uses
 Route::post('articles', 'ArticleController@store');
 
 
+
+//Noticias
+Route::get('articles/list',                ['as' => 'articles.list',       'uses' => 'ArticleController@list']); 
+Route::get('articles/edit/{id}',           ['as' => 'articles.edit',       'uses' => 'ArticleController@edit']); 
+Route::post('articles/search',             ['as' => 'articles.search',     'uses' => 'ArticleController@search']); 
+Route::get('articles/search',              ['as' => 'articles.search',     'uses' => 'ArticleController@search']); 
+Route::get('articles/categoria/{id}',      ['as' => 'articles.categoria',  'uses' => 'ArticleController@categoria']); 
+Route::put('articles/update/{id}',         ['as' => 'articles.update',     'uses' => 'ArticleController@update']);
+Route::delete('articles/destroy/{id}',     ['as' => 'articles.destroy',    'uses' => 'ArticleController@destroy']);
+Route::get('articles/show/{id}',           ['as' => 'articles.show',       'uses' => 'ArticleController@show']); 
+Route::post('articles', 'ArticleController@store');
+
+
+
+
 Auth::routes();
 

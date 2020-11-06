@@ -1914,7 +1914,8 @@ __webpack_require__.r(__webpack_exports__);
         path: '',
         link: '',
         category: '',
-        created_at: ''
+        created_at: '',
+        fonte: ''
       },
       article_id: '',
       page: 1,
@@ -1940,6 +1941,7 @@ __webpack_require__.r(__webpack_exports__);
           $state.loaded();
         } else {
           $state.complete();
+          fonte;
         }
       });
       this.page = this.page + 1;
@@ -39001,7 +39003,9 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(0, true)
+          _c("div", { staticClass: "box-footer" }, [
+            _c("span", [_vm._v("Fonte:  " + _vm._s(item.fonte) + " ")])
+          ])
         ])
       }),
       _vm._v(" "),
@@ -39017,16 +39021,7 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-footer" }, [
-      _c("span", [_vm._v("Fonte: ")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

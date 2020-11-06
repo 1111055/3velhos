@@ -95,13 +95,15 @@ border-spacing:0px;
                                                   
                                                @if($item->situacao == 0 && $item->cancelado == 0)
                                                   @if(Auth::user()->isinrule(['master']))
-                                                  <div id="fec{{ $item->id }}">
-                                                    <button type="button"  idjogo="{{ $item->id }}" class="btn btn-sm btn-xs btn-success btn-flat fechar">
+                                                  <div class="col-xs-2" id="fec{{ $item->id }}">
+                                                    <button type="button"  idjogo="{{ $item->id }}" class="btn btn-sm btn-xs btn-warning btn-flat fechar">
                                                             Fechar Jogo
                                                     </button>
                                                   </div>
                                                    @else
+                                                   <div class="col-xs-2">
                                                      <span class="label label-info" style="margin-top: 1%;">A decorrer</span>
+                                                   </div>
                                                    @endif
                                                @endif
                                              

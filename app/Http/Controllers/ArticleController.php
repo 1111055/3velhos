@@ -177,9 +177,10 @@ class ArticleController extends Controller
 
        $selcat = Categoriablog::getCatBlog();
 
-       $campains = Newslettermailchimp::getLists();
+     //  $campains = Newslettermailchimp::getLists();
 
-       $campains = $campains['lists'];
+    //   $campains = $campains['lists'];
+        $campains = "";
      //dd($campains);
         return view('backend.Articles.edit', compact('article','selcat','campains'));
     }
@@ -280,10 +281,11 @@ class ArticleController extends Controller
         $article->path        = $_path;
         $article->ordem       = $request->ordem;
         $article->activo      = $request->activo != null ? $request->activo : 0;
+        $article->fonte       = $request->fonte;
 
         $article->save();
 
-        if($request->emailcheck === 'on'){
+      /*  if($request->emailcheck === 'on'){
           
 
              // dd("entrou2");
@@ -294,7 +296,7 @@ class ArticleController extends Controller
  
           Newslettermailchimp::sendCampaign($retorno['id']);
             
-        }
+        }*/
 
        
          return redirect()->route('articles.edit', compact('article'))->with('sucess','Guardado com sucesso.');

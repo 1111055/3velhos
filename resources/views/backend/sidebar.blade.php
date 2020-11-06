@@ -42,6 +42,7 @@
               <li><a href="{{route('grupos')}}"><i class="fas fa-users"></i><span>Grupos</span></a></li>
             </ul>
           </li>
+          <li><a href="{{route('articles.list')}}"><i class="fas fa-bullhorn"></i> <span>Noticias</span></a></li>
          @endif
       </ul>
     </section>

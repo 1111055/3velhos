@@ -80,9 +80,23 @@ class ApostaController extends Controller
         // Data do jogo
         $yearjogo   = $dataconvert->year;
         $monthjogo  = $dataconvert->month;
-        $dayjogo    = $dataconvert->day;        
-        $horajogo   = $dataconvert->hour;
-        $minutojogo = $dataconvert->minute;
+        $dayjogo    = $dataconvert->day;   
+
+        $gamehour   = $jogo->hora;
+
+
+        $splitName = explode(' ', $gamehour); 
+
+        $splitNametwo = explode(':', $splitName[0]); 
+
+        $horajogo =  $splitNametwo[0];
+        $minutojogo =  $splitNametwo[1];
+
+        if($splitName[1] == "PM"){
+
+            $horajogotmp = $this->convert12to24($splitNametwo[0]);
+          
+        }
 
         $time =Carbon::now()->setTimezone('Europe/Lisbon');
 
@@ -105,6 +119,7 @@ class ApostaController extends Controller
 
             $horajogo = $this->convert12to24($splitNametwo[0]);
         }
+        
 
         if($year < $yearjogo){
 
@@ -120,8 +135,16 @@ class ApostaController extends Controller
 
                          if($hora < $horajogo){
                                 return true;
-                            }else{
+                           }elseif($hora == $horajogo){
+                              if($minuto < $minutojogo){
+                              
+                                  return true;
+                              }else{
                                 return false;
+                              }
+
+                            }else{
+                              return false;
                             }
 
                     }else{

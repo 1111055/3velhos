@@ -17,7 +17,7 @@
 					            </div>
                               </div>
                                  <div class="box-footer">
-                                 	<span>Fonte: </span>
+                                 	<span>Fonte:  {{ item.fonte }} </span>
                                  </div>
                             </div>
 					
@@ -46,7 +46,8 @@ export default{
 				path:'',
 				link:'',
 				category: '',
-				created_at: ''
+				created_at: '',
+			    fonte: '',
 			},
 			article_id: '',
 			page: 1,
@@ -75,7 +76,7 @@ export default{
 
                             $state.loaded();
                         } else{
-                         	$state.complete();
+                         	$state.complete();fonte
                          }
 
                     });
