@@ -43,7 +43,8 @@
             </ul>
           </li>
           <li><a href="{{route('articles.list')}}"><i class="fas fa-bullhorn"></i> <span>Noticias</span></a></li>
-       
+        @endif
+        @if(Auth::user()->isinrule(['master']))
         <li class="treeview">
           <a href="#"><i class="fa fa-align-justify"></i> <span>Páginas</span>
             <span class="pull-right-container">
