@@ -157,7 +157,8 @@ class JogoController extends Controller
            Article::create([
                 'title'    => "Jogo Fechado, ". $vit,
                 'body'     => $html, 
-                'activo'   => 1
+                'activo'   => 1,
+                'fonte'    => " 3 Velhos."
                 
             ]); 
 
@@ -221,7 +222,8 @@ class JogoController extends Controller
                        Article::create([
                             'title'    => "Novos Jogos Disponiveis",
                             'body'     => $html, 
-                            'activo'   => 1
+                            'activo'   => 1,
+                            'fonte'    => " 3 Velhos."
                             
                         ]); 
                   }

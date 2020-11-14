@@ -1941,7 +1941,6 @@ __webpack_require__.r(__webpack_exports__);
           $state.loaded();
         } else {
           $state.complete();
-          fonte;
         }
       });
       this.page = this.page + 1;

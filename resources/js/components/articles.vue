@@ -76,7 +76,7 @@ export default{
 
                             $state.loaded();
                         } else{
-                         	$state.complete();fonte
+                         	$state.complete();
                          }
 
                     });
