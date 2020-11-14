@@ -80,7 +80,40 @@
                                         </div>
                                       </div>
 
+                                     <div class="col-xs-12" style="display: block;" id="emailshow">
+                                            <div class="box">
+                                             <div class="panel panel-default">
+                                               <div class="panel-body">
+                                                <div class="box box-info">
 
+                                                  
+                                                    
+                                                    <div class="col-sm-6">
+                                                         <div class="form-group">
+                                                            {!! Form::label('* Layout:',null, ['class' => 'col-sm-2 control-label']) !!}
+                                                            <select class="form-control" name="emailsend" >
+                                                              <option value="0">Selecionar uma Lista de contactos</option>
+
+                                                              @foreach($campains as $item)
+                                                                 <option value="{{$item['id']}}">{{$item['name']  !== '' ? $item['name']  : ''}}</option>
+                                                              @endforeach
+                                                            </select>
+                                                         </div>
+ 
+                                                    </div>
+                                                      <div class="col-sm-1">                                                  
+                                                         <div class="form-group">
+                                                            {!! Form::label('Novo',null, ['class' => 'col-sm-2 control-label']) !!}
+                                                            <button type="button" class="btn btn-primary form-control"><i class="fas fa-plus-circle"></i></button>
+                                                         </div>
+                                                    </div>
+                                                   
+                                                    </div>
+                                                </div>
+                                               </div>
+                                            </div>
+                                            </div>
+                                        </div>
 
 
 

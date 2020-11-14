@@ -11,8 +11,8 @@
                    Edit Descriptions
                   </h1>
                   <ol class="breadcrumb">
-                    <li><a href="{{route('dash')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li><a href="{{route('dash')}}"><i class="fa fa-align-justify"></i> Paginas</a></li>
+                    <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="{{route('pagina')}}"><i class="fa fa-align-justify"></i> Paginas</a></li>
                   </ol>
                 </section>
 
@@ -46,12 +46,7 @@
                                                 </div>
                                                 
                                               </div>
-                                              <div class="form-group">
-                                                   {!! Form::label('Descrição:',null, ['class' => 'col-sm-2 control-label']) !!}
-                                                <div class="col-sm-8">
-                                                   {!! Form::text('descricaodesc',$desc->descricao,['class' => 'form-control']) !!}
-                                                </div>
-                                              </div>
+
                                               <div class="form-group">
                                                    {!! Form::label('Descrição:',null, ['class' => 'col-sm-2 control-label']) !!}
                                                 <div class="col-sm-8">

@@ -70,89 +70,20 @@ border-spacing:0px;
       <section class="content" >
               <div class="row">
                 <div class="col-xs-8" id="jogoclass">
-                  <div class="box">
-            
-                    <div class="box-header">
-                    <button class="btn btn-default btn-sm" data-toggle="control-sidebar"><i class="fa fa-filter"></i> </button>  <h3 class="box-title">{{ $datatmp }}</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding" >
-                          <table class="table no-margin" id="mytable" cellspacing="0" cellpadding="0">
-                            <thead>
-                                <tr>
-                                  <th class="col-xs-5 text-center">Casa</th>
-                                  <th class="col-xs-1 text-center">x</th>
-                                  <th class="col-xs-5 text-center">Fora</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach( $jogo as $item)
 
-                                <tr><td colspan="3" class="text-cente {{ $item->classaposta }}" >
-                                        <div class="col-xs-10">
-                                           
-                                                  {!! $item->vencedor !!}
-                                                  
-                                               @if($item->situacao == 0 && $item->cancelado == 0)
-                                                  @if(Auth::user()->isinrule(['master']))
-                                                  <div class="col-xs-2" id="fec{{ $item->id }}">
-                                                    <button type="button"  idjogo="{{ $item->id }}" class="btn btn-sm btn-xs btn-warning btn-flat fechar">
-                                                            Fechar Jogo
-                                                    </button>
-                                                  </div>
-                                                   @else
-                                                   <div class="col-xs-2">
-                                                     <span class="label label-info" style="margin-top: 1%;">A decorrer</span>
-                                                   </div>
-                                                   @endif
-                                               @endif
-                                             
-                                          </div>
-                                        <div class="col-xs-2" style="margin-top: 1%;">
-                                        <span class="label label-default  text-center">{{ $item->hora }}</span>
-                                      </div>
-                                    </td>
-                                  <td></td>  @if($ck1!=1)<td></td> @endif</tr>
-                                    <tr>
-
-                                      <td class="col-xs-2  text-right">
-                                        
-                                          @if($item->_aposta == "1")
-
-                                            <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-success btn-sm apptmp">{{ $item->eq1 }}   </button>
-                                     
-                                           @else
-                                            <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-default btn-sm apptmp">{{ $item->eq1 }}  </button>
-                                      
-                                        @endif
-                                      </td>
-                                      <td class="col-xs-1  text-center">
-                                     
-                                         @if($item->_aposta == "x")
-                                           <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-success btn-sm apptmp">X</button>
-                                          @else
-                                            <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-default btn-sm apptmp">X</button>
-                                          @endif
-                                      </td>
-                                      <td class="col-xs-2">
-                                 
-                                         @if($item->_aposta == "2")
-                                           <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-success btn-sm apptmp">{{ $item->eq2 }}</button>
-                                         @else
-                                           <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-default btn-sm apptmp">{{ $item->eq2 }}</button>
-                                         @endif
-                                      </td>
-
-                                    </tr>
-                              @endforeach
-                            </tbody>
-                          </table>
-                    </div>
-                  </div>
-                </div>
-                <div class="container col-xs-4" style="float: right;" id="Classificacaoclass">
-
-                      <div class="box box-primary">
+                  <div class="nav-tabs-custom">
+                      <!-- Tabs within a box -->
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a href="#feednews" data-toggle="tab">Feed News</a></li>                     
+                        <li><a href="#jogosteste" data-toggle="tab">Jogos</a></li>
+                        <li><a href="#classi" data-toggle="tab">Classificação</a></li>   
+                        
+                      </ul>
+                      <div class="tab-content no-padding" > 
+                        
+                        
+                        <div class="chart tab-pane" id="classi">
+                        <div class="box box-primary">
                         <div class="box-header with-border">
                           <h3 class="box-title">Classificação</h3>
                         </div>
@@ -162,7 +93,104 @@ border-spacing:0px;
                          
                           </ul>
                         </div>
+                      </div>                        
+                        </div>
+                        <div class="chart tab-pane active" id="feednews">
+                            <div id="app">
+                              <section class="content">
+                                   <articles></articles>
+                              </section>
+                            </div>
+                         </div>
+                        <div class="chart tab-pane" id="jogosteste">
+                              <div class="box">
+            
+                                  <div class="box-header">
+                                  <button class="btn btn-default btn-sm" data-toggle="control-sidebar"><i class="fa fa-filter"></i> </button>  <h3 class="box-title">{{ $datatmp }}</h3>
+                                  </div>
+                                  <!-- /.box-header -->
+                                  <div class="box-body table-responsive no-padding" >
+                                        <table class="table no-margin" id="mytable" cellspacing="0" cellpadding="0">
+                                          <thead>
+                                              <tr>
+                                                <th class="col-xs-5 text-center">Casa</th>
+                                                <th class="col-xs-1 text-center">x</th>
+                                                <th class="col-xs-5 text-center">Fora</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              @foreach( $jogo as $item)
+
+                                              <tr><td colspan="3" class="text-cente {{ $item->classaposta }}" >
+                                                      <div class="col-xs-10">
+                                                         
+                                                                {!! $item->vencedor !!}
+                                                                
+                                                             @if($item->situacao == 0 && $item->cancelado == 0)
+                                                                @if(Auth::user()->isinrule(['master']))
+                                                                <div class="col-xs-2" id="fec{{ $item->id }}">
+                                                                  <button type="button"  idjogo="{{ $item->id }}" class="btn btn-sm btn-xs btn-warning btn-flat fechar">
+                                                                          Fechar Jogo
+                                                                  </button>
+                                                                </div>
+                                                                 @else
+                                                                 <div class="col-xs-2">
+                                                                   <span class="label label-info" style="margin-top: 1%;">A decorrer</span>
+                                                                 </div>
+                                                                 @endif
+                                                             @endif
+                                                           
+                                                        </div>
+                                                      <div class="col-xs-2" style="margin-top: 1%;">
+                                                      <span class="label label-default  text-center">{{ $item->hora }}</span>
+                                                    </div>
+                                                  </td>
+                                                <td></td>  @if($ck1!=1)<td></td> @endif</tr>
+                                                  <tr>
+
+                                                    <td class="col-xs-2  text-right">
+                                                      
+                                                        @if($item->_aposta == "1")
+
+                                                          <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-success btn-sm apptmp">{{ $item->eq1 }}   </button>
+                                                   
+                                                         @else
+                                                          <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-default btn-sm apptmp">{{ $item->eq1 }}  </button>
+                                                    
+                                                      @endif
+                                                    </td>
+                                                    <td class="col-xs-1  text-center">
+                                                   
+                                                       @if($item->_aposta == "x")
+                                                         <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-success btn-sm apptmp">X</button>
+                                                        @else
+                                                          <button type="button" idjogo="{{ $item->id }}" app="x"  class="btn btn-default btn-sm apptmp">X</button>
+                                                        @endif
+                                                    </td>
+                                                    <td class="col-xs-2">
+                                               
+                                                       @if($item->_aposta == "2")
+                                                         <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-success btn-sm apptmp">{{ $item->eq2 }}</button>
+                                                       @else
+                                                         <button type="button" app="2"  idjogo="{{ $item->id }}" class="btn btn-default btn-sm apptmp">{{ $item->eq2 }}</button>
+                                                       @endif
+                                                    </td>
+
+                                                  </tr>
+                                            @endforeach
+                                          </tbody>
+                                        </table>
+                                  </div>
+                                </div>
+                        </div>
                       </div>
+                  </div>
+                              <!-- /.nav-tabs-custom -->
+
+                </div>
+                <div class="container col-xs-4" style="float: right;" id="Classificacaoclass">
+
+
 
                  </div>
 

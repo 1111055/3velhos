@@ -137,6 +137,16 @@ Route::get('articles/show/{id}',           ['as' => 'articles.show',       'uses
 Route::post('articles', 'ArticleController@store');
 
 
+//Tabela das descricoes
+Route::post('desc', 'DescController@store');
+Route::get('desc/edit/{id}/{idpage}',         ['as' => 'desc.edit',    'uses' => 'DescController@edit']); 
+Route::put('desc/update/{id}',                ['as' => 'desc.update',  'uses' => 'DescController@update']);
+Route::delete('desc/destroy/{id}/{idpage}',   ['as' => 'desc.destroy', 'uses' => 'DescController@destroy']);
+
+
+//Politica e Privacidade
+Route::get('policy', 'PolicyController@index');
+Route::get('policy', 'PolicyController@index')->name('policy');
 
 
 Auth::routes();

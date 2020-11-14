@@ -43,7 +43,25 @@
             </ul>
           </li>
           <li><a href="{{route('articles.list')}}"><i class="fas fa-bullhorn"></i> <span>Noticias</span></a></li>
-         @endif
+       
+        <li class="treeview">
+          <a href="#"><i class="fa fa-align-justify"></i> <span>Páginas</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('pagina')}}"><i class="fa fa-plus-circle"></i> Nova Página</a></li>
+
+            @if(count($paginas) > 0)
+               @foreach($paginas as $item)
+                <li><a href="{{ route('pagina.edit', ['id' => $item->id])}}">{{ $item->nome}}</a></li>
+               @endforeach 
+            @endif
+
+          </ul>
+        </li>
+          @endif
       </ul>
     </section>
   </aside>

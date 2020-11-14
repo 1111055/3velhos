@@ -85,6 +85,10 @@ body {
   padding: 15px;
   color: #444;
   border-top: 1px solid #d2d6de;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 /* Fixed layout */
 .fixed .main-header,

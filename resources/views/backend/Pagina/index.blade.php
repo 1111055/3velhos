@@ -12,7 +12,7 @@
                    Páginas
                   </h1>
                   <ol class="breadcrumb">
-                    <li><a href="{{route('dash')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li><a href="{{route('pagina')}}"><i class="fa fa-align-justify"></i> Paginas</a></li>
                   </ol>
                 </section>

@@ -97,7 +97,7 @@
                    Editar Página
                   </h1>
                   <ol class="breadcrumb">
-                    <li><a href="{{route('dash')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li><a href="{{route('pagina')}}"><i class="fa fa-align-justify"></i> Paginas</a></li>
                     <li><a href="{{route('pagina.edit', $pagina->id)}}"><i class="fa fa-align-justify"></i> Editar Pagina</a></li>
                   </ol>
@@ -310,42 +310,7 @@
 
                                       </div>
                                  </div>
-                                  <div class="tab-pane fade in" id="tab4">
-                                     <div class="box box-info">
-                                      <div class="box-body">
-                                          <div class="row col-xs-12">
-                                            <h3>Banners</h3>
-                                                {!! Form::open(['url' => 'pagebanner','class' => 'form-horizontal']) !!}
 
-                                                <div class="form-group">
-                                                {!! Form::hidden('idpage',$pagina->id,null) !!}
-                                                {!! Form::label('Banner Home Top:',null, ['class' => 'col-sm-2 control-label']) !!}
-                                                  
-                                                  <div class="col-sm-8">
-                                                     {!! Form::select('idbanner', $banners,1,['class' => 'form-horizontal']) !!}
-                                                  </div>
-                                                </div>
-                                                
-                                                 <div class="form-group">
-                                                    {!! Form::label('Banner Home Meio:',null, ['class' => 'col-sm-2 control-label']) !!}
-                                                  <div class="col-sm-8">
-                                                     {!! Form::select('bannermidle', $banners,11,['class' => 'form-horizontal']) !!}
-                                                  </div>
-                                                </div>
-                                                 <div class="form-group">
-                                                    {!! Form::label('Banner Home Fundo:',null, ['class' => 'col-sm-2 control-label']) !!}
-                                                  <div class="col-sm-8">
-                                                     {!! Form::select('bannerdown', $banners,21,['class' => 'form-horizontal']) !!}
-                                                  </div>
-                                                </div>
-
-                                                 {!! Form::submit('Guardar',['class' => 'btn btn-info pull-right']) !!}
-                                                {!! Form::close() !!}
-                                          </div>
-                                          <hr>
-                                      </div>
-                                    </div>
-                                  </div>
                                 </div>
                               </div>
                          </div>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pagina;
 use App\Desc;
-use App\Banner;
 use App\Http\Requests\PaginaRequest;
 use Image;
 use File;
@@ -95,17 +94,10 @@ class PaginaController extends Controller
 
        $desc =  Desc::where('page_id','=',$id)->get();
 
-       $bn = Banner::
-         where('activo', '=', '1')
-         ->orderBy('ordem','asc')->get();
-
-
-       $banners = $bn->pluck('titulo','id');
-
        
-       $banners->prepend('-- Escolha um Submenu -- ',0);
 
-        return view('backend.Pagina.edit', compact('pagina','desc','banners'));
+
+        return view('backend.Pagina.edit', compact('pagina','desc'));
     }
 
     /**

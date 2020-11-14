@@ -197,7 +197,14 @@ class UserController extends Controller
                        // crop image
 
                         $destinationPath = public_path('/logotipo/User/');
- 
+                        $thumb_img = Image::make($photo->getRealPath());
+                    
+                        if(file_exists(public_path('/logotipo/User/'.$imagename))){
+
+                              unlink(public_path('/logotipo/User/'.$imagename));
+
+                        }
+
                         $altura =   $height;
                         $comprimento = $width;
 
@@ -212,36 +219,15 @@ class UserController extends Controller
                             $cmpfinal = $comprimento * $divisaocom;
 
                         }
-
-
-                
-
-                        // Get new sizes
-                        list($comprimento, $altura) = getimagesize($_FILES['banerimg']['tmp_name']);
-                        $newwidth = $cmpfinal;
-                        $newheight = $altfinal;
-
-                        // Load
-                        $thumb = imagecreatetruecolor($newwidth, $newheight);
-                        $source = imagecreatefromjpeg($_FILES['banerimg']['tmp_name']);
-
-                        // Resize
-                        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-
-                        // Output
-                       
-
-
-                        //dd(imagejpeg($thumb));
-
-                        $uploaddir =  public_path('/logotipo/Noticias/tette.jpg');
-                        $uploadfile = $uploaddir . basename($_FILES['banerimg']['name']);
-
-                        imagejpeg($thumb,$uploaddir,100);
-
-                        
-
-
+                        $_path = $request->root().'/logotipo/User/'.$imagename;
+                        // Resized image
+                        $thumb_img->resize($cmpfinal, $altfinal, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                        // Canvas image
+                        $canvas = Image::canvas(160, 160);
+                        $canvas->insert($thumb_img, 'center');
+                        $canvas->save($destinationPath.'/'.$imagename,100);
                                     
       }
 
