@@ -310,18 +310,6 @@ $('.fechar').on('click', function(){
 
 
 
-if ($(window).width() < 514) {
-    $('#bodyarrow').attr('class', 'container col-xs-12');
-    $('#Classificacaoclass').attr('class', 'container col-xs-12');
-    $('#jogoclass').attr('class', ' container col-xs-12');
-
-} else {
-    $('#bodyarrow').attr('class', 'container col-xs-4');
-    $('#jogoclass').attr('class', 'container col-xs-8');
-    $('#Classificacaoclass').attr('class', 'container col-xs-4');
-
-}
-
 
 function classificacoes(id){
         jQuery('#classifica').html('');
@@ -340,6 +328,24 @@ function classificacoes(id){
 
   }
 
+function jogos(id){
+        jQuery('#classifica').html('');
+        $.get("{{ route('classificacao.getall') }}?id="+id)
+          .done(function( data ) {
+
+            data.forEach(function(entry) {
+             console.log(entry);
+
+             var html =  "<li class='item'><div class='product-info'><a href='javascript:void(0)' class='product-title'>"+ entry['nome'] +"<span class='label label-success pull-right'>"+ entry['pontos'] +"</span></a></div></li>";
+
+             $( "#classifica" ).append(html);
+            });
+                     
+          });
+
+  }
+
+
 
 $(document).on('click', '.grupo', function(){
     
@@ -352,3 +358,4 @@ $(document).on('click', '.grupo', function(){
 </script>
 
  @yield('scripts')
+</html>

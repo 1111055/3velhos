@@ -3,57 +3,6 @@
 @section('content')
 
 
-<style type="text/css">
-  
-  @media (max-width: 830px) {
-  .form-inline {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-.apptmp{
-  width: 100%;
-}
-.apptmp2{
-  width: 100%;
-}
-
-
-.three-inline-buttons .button {
-    margin-left: 15px;
-    margin-right: 15px;
-}
-
-.three-inline-buttons {
-     display: table;
-     margin: 0 auto;
-}
-
-@media only screen and (max-width: 960px) {
-
-    .three-inline-buttons .button{
-        width: 100%;
-        margin: 20px;
-        text-align: center;
-    }
-    
-}
-table#mytable,
-table#mytable td
-{
-    border: none !important;
-    padding:4px; 
-    border-width:0px; 
-    margin:0px; 
-}
-table#mytable {
-border:0px;
-border-collapse:collapse;
-border-spacing:0px;
-}
-
-
-</style>
 
 
   <div class="alert alert-success" id="showsucess" style="display:none; border-radius: 0; float: right; margin-top: 7%; position: fixed; width: 600px; z-index: 9999;margin-right: 15%;">
@@ -69,13 +18,13 @@ border-spacing:0px;
   <div class="content-wrapper">
       <section class="content" >
               <div class="row">
-                <div class="col-xs-8" id="jogoclass">
+                <div class="col-xs-12" id="jogoclass">
 
                   <div class="nav-tabs-custom">
                       <!-- Tabs within a box -->
                       <ul class="nav nav-tabs">
-                        <li class="active"><a href="#feednews" data-toggle="tab">Feed News</a></li>                     
-                        <li><a href="#jogosteste" data-toggle="tab">Jogos</a></li>
+                        <li @if($filter == 0) class="active" @endif><a href="#feednews" data-toggle="tab">Feed News</a></li>                     
+                        <li @if($filter == 1) class="active" @endif><a href="#jogosteste" data-toggle="tab">Jogos</a></li>
                         <li><a href="#classi" data-toggle="tab">Classificação</a></li>   
                         
                       </ul>
@@ -83,11 +32,29 @@ border-spacing:0px;
                         
                         
                         <div class="chart tab-pane" id="classi">
+                         <div class="panel panel-default"  id="filtergrupo" style="display: none;" >
+                            <div class="panel-body" style="padding: 0px !important; background-color: #80532d ;">   
+                                       <ul class="control-sidebar-menu" style="margin-bottom: 1px !important;">
+                                        <li class="text-center">
+                                           <input id="grupoactivo" type="hidden" value="0">
+                                            <button type="button" class="btn btn-sm btn-info  btn-xs grupo" idg="-1" >
+                                                      Geral
+                                             </button>
+                                           @foreach( $grupos as $item)
+                                             <button type="button" class="btn btn-sm btn-info  btn-xs grupo" idg="{{$item->grupo_id}}" >
+
+                                                          {{ $item->grupo->nome }}
+                                             </button>
+                                           @endforeach
+                                        </li>
+                                      </ul>
+                             </div>
+                          </div>
                         <div class="box box-primary">
                         <div class="box-header with-border">
-                          <h3 class="box-title">Classificação</h3>
+                          <button class="btn btn-default btn-sm" id="btnfilterclassifica"><i class="fa fa-filter"></i> </button> <h3 class="box-title">Classificação</h3>
                         </div>
-
+                                
                         <div class="box-body">
                           <ul class="products-list product-list-in-box" id="classifica">
                          
@@ -95,18 +62,81 @@ border-spacing:0px;
                         </div>
                       </div>                        
                         </div>
-                        <div class="chart tab-pane active" id="feednews">
+                        <div class="chart tab-pane @if($filter == 0) active @endif" id="feednews">
                             <div id="app">
                               <section class="content">
                                    <articles></articles>
                               </section>
                             </div>
                          </div>
-                        <div class="chart tab-pane" id="jogosteste">
-                              <div class="box">
+                        <div class="chart tab-pane @if($filter == 1) active @endif" id="jogosteste">
+                          <div class="panel panel-default" id="filterjogo" @if($filter == 0) style="display: none;" @endif>
+                            <div class="panel-body" style="padding: 0px !important; background-color:  #80532d ;">   
+                               <ul class="control-sidebar-menu" style="margin-bottom: 1px !important;">
+                                        <li>
+                                               <div class="three-inline-buttons">
+                                                      <p>
+                                                          <label>
+                                                              <a href="{{route('home')}}?op0=1" class="btn @if($ck0==1) btn-warning @else btn-default @endif btn-xs">Todos</a>
+                                                          </label>
+
+                                                          <label>
+                                                              <a href="{{route('home')}}?op1=1" class="btn @if($ck1==1) btn-warning @else btn-default @endif btn-xs">Abertos</a>
+                                                          </label>
+
+                                                          <label> 
+                                                            <a href="{{route('home')}}?op2=1" class="btn @if($ck2==1) btn-warning @else btn-default @endif  btn-xs">Fechados</a>
+                                                          </label>
+
+                                                          <label>
+                                                              <a href="{{route('home')}}?op3=1" class="btn @if($ck3==1) btn-warning @else btn-default @endif btn-xs">Cancelados</a>
+                                                          </label>
+
+                                                          <label>
+                                                               @if(Auth::user()->isinrule(['master']))
+
+                                                                       <button type="button" class="btn btn-sm btn-info  btn-xs" data-toggle="modal" data-target="#exampleModal">
+                                                                                      Inserir Novo Jogo
+                                                                       </button>
+
+                                                                @endif
+                                                          </label>
+                                                      </p>
+                                               </div>
+                                        </li>
+                                </ul>
+
+                            </div>
+                          </div>
+                                <div class="box">
             
                                   <div class="box-header">
-                                  <button class="btn btn-default btn-sm" data-toggle="control-sidebar"><i class="fa fa-filter"></i> </button>  <h3 class="box-title">{{ $datatmp }}</h3>
+                                   <div class=" col-lg-1"><button class="btn btn-default btn-sm" id="btnfilterjogos"><i class="fa fa-filter"></i> </button> </div>  <div class=" col-lg-2">
+                                 <ul class="control-sidebar-menu">
+                                    <li>
+                                      <div class="input-group">
+
+                                         <span class="input-group-btn">
+                                          <form action="{{route('home.data')}}" method="post">
+                                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                              <input type="hidden" value="{{$daybefore}}" name="data">
+                                              <button type="submit" class="btn btn-default "><i class="fa fa-arrow-left"></i></button>
+                                          </form>
+                                           
+                                         </span>
+                                         <input type="text" class="form-control text-center" value="{{ $datatmp }}" readonly="true">
+                                         <span class="input-group-btn">
+                                          <form action="{{route('home.data')}}" method="post">
+                                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                              <input type="hidden" value="{{$dayafter}}" name="data">
+                                              <button type="submit" class="btn btn-default "><i class="fa fa-arrow-right"></i></button>
+                                          </form>
+                                              
+                                         </span>
+                                       </div>
+                                    </li>
+                                  </ul>
+                               </div>
                                   </div>
                                   <!-- /.box-header -->
                                   <div class="box-body table-responsive no-padding" >
@@ -185,16 +215,8 @@ border-spacing:0px;
                         </div>
                       </div>
                   </div>
-                              <!-- /.nav-tabs-custom -->
 
                 </div>
-                <div class="container col-xs-4" style="float: right;" id="Classificacaoclass">
-
-
-
-                 </div>
-
-
               </div>
     </section>
 
@@ -316,8 +338,17 @@ border-spacing:0px;
     </div>
   </div>
 </div>
-
-
 @stop
+@section('scripts')
+<script type="text/javascript">
 
-@include('backend.rightsite')
+$( "#btnfilterjogos" ).click(function() {
+  $( "#filterjogo" ).slideToggle( "slow" );
+});
+
+$( "#btnfilterclassifica" ).click(function() {
+  $( "#filtergrupo" ).slideToggle( "slow" );
+});
+
+</script>
+@stop

@@ -177,11 +177,11 @@ class ArticleController extends Controller
 
        $selcat = Categoriablog::getCatBlog();
 
-     //  $campains = Newslettermailchimp::getLists();
+       $campains = Newslettermailchimp::getLists();
 
-    //   $campains = $campains['lists'];
-        $campains = "";
-     //dd($campains);
+       $campains = $campains['lists'];
+       // $campains = "";
+    // dd($campains);
         return view('backend.Articles.edit', compact('article','selcat','campains'));
     }
 
@@ -285,18 +285,20 @@ class ArticleController extends Controller
 
         $article->save();
 
-      /*  if($request->emailcheck === 'on'){
+        if($request->emailcheck === 'on'){
           
 
              // dd("entrou2");
           $emailtmp = view('backend.Emails.emailchimp',compact('article'))->render();
 
 
-          $retorno = Newslettermailchimp::createCampaign('FeelBit',"gera@feelbit.pt", $article->title, $request->emailsend ,$emailtmp, $article->body, $article->path);
+          $retorno = Newslettermailchimp::createCampaign('3 Velhos',"3velhos@gmail.com", $article->title, $request->emailsend ,$emailtmp, $article->body, "3velhos.pt/login");
+
+        // dd($retorno);
  
           Newslettermailchimp::sendCampaign($retorno['id']);
             
-        }*/
+        }
 
        
          return redirect()->route('articles.edit', compact('article'))->with('sucess','Guardado com sucesso.');

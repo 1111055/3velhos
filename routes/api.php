@@ -24,6 +24,13 @@ Route::get('articles/{id}', 'ArticleController@show');
 Route::post('articles', 'ArticleController@store');
 Route::delete('articles/{id}', 'ArticleController@destroy');
 
+
+
+
+//Lista de Artigos
+Route::get('jogo', 'JogoController@index');
+
+
 // Categoria de artigos
 Route::get('categoriablog', 'CategoriablogController@index');
 Route::get('categoriablog/{id}', 'CategoriablogController@show');

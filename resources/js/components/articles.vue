@@ -59,7 +59,7 @@ export default{
 	methods: {
 
 		infiniteHandler($state) {
-     
+					
                  	fetch('http://velhos3.herokuapp.com/api/articles?page='+this.page)
 
                     .then(response => {

@@ -27,6 +27,7 @@ class DashController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+          $filter = 0;
 
         $grupos = Usergrupo::where('user_id','=',$user->id)->get();
       
@@ -40,6 +41,11 @@ class DashController extends Controller
                 $jogo = Jogo::where('data_encontro', '>=', carbon::now()->startOfDay())->where('data_encontro', '<', carbon::now()->addDays(1)->startOfDay())->
                 orderBy('hora','asc')->get();
                 $request->session()->put('datafilter', Carbon::now());
+
+                  $datain =  Carbon::now();
+
+                $daybefore =  $datain->subDay()->format('Y-m-d');
+                $dayafter =  $datain->addDay()->format('Y-m-d');
                    
         }else{
 
@@ -50,8 +56,16 @@ class DashController extends Controller
 
                 $jogo = Jogo::where('data_encontro', '>=',   $antes->startOfDay()->format('y-m-d H:i:s'))->where('data_encontro', '<', $depois)->
                        orderBy('hora','asc')->get();
+
+
+               $datain =  Carbon::parse($datatmp);
+              //  dd( $datain );
+
+                $daybefore =  Carbon::parse($datatmp)->subDay()->format('Y-m-d');
+                $dayafter =   Carbon::parse($datatmp)->addDay()->format('Y-m-d');
               
         }
+
 
         $userId = Auth::id();
 
@@ -65,6 +79,7 @@ class DashController extends Controller
             if($request->op0){
                 $ck2 = 0; $ck3 = 0;$ck1 = 0;$ck0 = 1;
                  $request->session()->put('opfilter', 0);
+                  $filter = 1;
             }
 
             if($request->op1){
@@ -72,6 +87,7 @@ class DashController extends Controller
                 $jogo = $jogo->where('situacao','=','0');
                 $ck2 = 0; $ck3 = 0;$ck1 = 1;$ck0 = 0;
                  $request->session()->put('opfilter', 1);
+                   $filter = 1;
             }
 
             if($request->op2){
@@ -79,6 +95,7 @@ class DashController extends Controller
                 $jogo = $jogo->where('situacao','=','1');
                 $ck2 = 1; $ck3 = 0;$ck1 = 0;$ck0 = 0;
                  $request->session()->put('opfilter', 2);
+                   $filter = 1;
             }
 
             if($request->op3){
@@ -86,6 +103,7 @@ class DashController extends Controller
                  $jogo = $jogo->where('cancelado','=','1');
                  $ck2 = 0; $ck3 = 1;$ck1 = 0;$ck0 = 0;
                   $request->session()->put('opfilter', 3);
+                    $filter = 1;
             }
         }
 
@@ -172,8 +190,8 @@ class DashController extends Controller
         
         $user->authorizeRoles(['master', 'supermaster','Guest']);
 
-
-        return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp','grupos'));
+      
+        return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp','grupos','daybefore','dayafter','filter'));
     }
 
 
@@ -235,8 +253,20 @@ class DashController extends Controller
 
 
         if($data){
-          
-             if($data == 1){
+
+               $datain =  Carbon::parse($data);
+               $datain2 =  Carbon::parse($data);
+
+               $subnov = $datain->startOfDay();
+               $jogo = $jogo->where('data_encontro', '=', $subnov);
+
+                $daybefore =   Carbon::parse($data)->subDay()->format('Y-m-d');
+                $dayafter  =   $datain2->addDay()->format('Y-m-d');
+
+                $datatmp = $subnov->format('M d');
+                $request->session()->put('datafilter',   $subnov);
+
+          /*   if($data == 1){
                 $subnov = $datasession->subDays(1)->startOfDay();
 
                 $jogo = $jogo->where('data_encontro', '=', $subnov);
@@ -249,7 +279,7 @@ class DashController extends Controller
                   $jogo = $jogo->where('data_encontro', '=', $subnov);
                   $datatmp = $subnov->format('M d');
                    $request->session()->put('datafilter',   $subnov);
-             }
+             }*/
 
         }
 
@@ -324,13 +354,14 @@ class DashController extends Controller
             $value->hora = $testetmp;
                    
          }    
-         //dd($datatmp);
+     
         $jogo = $jogo->sortBy('hora');
 
         $user->authorizeRoles(['master', 'supermaster','Guest']);
+         $filter = 1;
 
 
-        return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp','grupos'));
+        return view('backend.index', compact('class','userId','jogo','ck1','ck2','ck3','ck0','datatmp','grupos','daybefore','dayafter','filter'));
 
     }
 

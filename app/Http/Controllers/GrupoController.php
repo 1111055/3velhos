@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Grupo;
 use App\Http\Requests\GrupoRequest;
+use Illuminate\Support\Facades\Auth;
 
 class GrupoController extends Controller
 {
