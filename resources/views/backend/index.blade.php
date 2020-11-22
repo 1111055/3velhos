@@ -54,68 +54,84 @@
                         <div class="box-header with-border">
                           <button class="btn btn-default btn-sm" id="btnfilterclassifica"><i class="fa fa-filter"></i> </button> <h3 class="box-title">Classificação</h3>
                         </div>
-                                
-                        <div class="box-body">
-                          <ul class="products-list product-list-in-box" id="classifica">
-                         
-                          </ul>
-                        </div>
+                          <div class="col-lg-3">
+                          </div>
+                           <div class="col-lg-6">       
+                              <div class="box-body">
+                                <ul class="products-list product-list-in-box" id="classifica">
+                               
+                                </ul>
+                              </div>
+                          </div>
+                          <div class="col-lg-3">
+                          </div>
                       </div>                        
                         </div>
                         <div class="chart tab-pane @if($filter == 0) active @endif" id="feednews">
+                           <div class="col-lg-3">
+                          </div>
+                           <div class="col-lg-6">
                             <div id="app">
                               <section class="content">
                                    <articles></articles>
                               </section>
                             </div>
-                         </div>
-                        <div class="chart tab-pane @if($filter == 1) active @endif" id="jogosteste">
-                          <div class="panel panel-default" id="filterjogo" @if($filter == 0) style="display: none;" @endif>
-                            <div class="panel-body" style="padding: 0px !important; background-color:  #80532d ;">   
-                               <ul class="control-sidebar-menu" style="margin-bottom: 1px !important;">
-                                        <li>
-                                               <div class="three-inline-buttons">
-                                                      <p>
-                                                          <label>
-                                                              <a href="{{route('home')}}?op0=1" class="btn @if($ck0==1) btn-warning @else btn-default @endif btn-xs">Todos</a>
-                                                          </label>
-
-                                                          <label>
-                                                              <a href="{{route('home')}}?op1=1" class="btn @if($ck1==1) btn-warning @else btn-default @endif btn-xs">Abertos</a>
-                                                          </label>
-
-                                                          <label> 
-                                                            <a href="{{route('home')}}?op2=1" class="btn @if($ck2==1) btn-warning @else btn-default @endif  btn-xs">Fechados</a>
-                                                          </label>
-
-                                                          <label>
-                                                              <a href="{{route('home')}}?op3=1" class="btn @if($ck3==1) btn-warning @else btn-default @endif btn-xs">Cancelados</a>
-                                                          </label>
-
-                                                          <label>
-                                                               @if(Auth::user()->isinrule(['master']))
-
-                                                                       <button type="button" class="btn btn-sm btn-info  btn-xs" data-toggle="modal" data-target="#exampleModal">
-                                                                                      Inserir Novo Jogo
-                                                                       </button>
-
-                                                                @endif
-                                                          </label>
-                                                      </p>
-                                               </div>
-                                        </li>
-                                </ul>
-
-                            </div>
+                           </div>
+                          <div class="col-lg-3">
                           </div>
+                        </div>
+                        <div class="chart tab-pane @if($filter == 1) active @endif" id="jogosteste">
+                          <div class="col-lg-3">
+                          </div>
+                           <div class="col-lg-6">
+                              <div class="panel panel-default" id="filterjogo" @if($filter == 0) style="display: none;" @endif>
+                                <div class="panel-body" style="padding: 0px !important; background-color:  #80532d ;">   
+                                   <ul class="control-sidebar-menu" style="margin-bottom: 1px !important;">
+                                            <li>
+                                                   <div class="three-inline-buttons">
+                                                          <p>
+                                                              <label>
+                                                                  <a href="{{route('home')}}?op0=1" class="btn @if($ck0==1) btn-warning @else btn-default @endif btn-xs">Todos</a>
+                                                              </label>
+
+                                                              <label>
+                                                                  <a href="{{route('home')}}?op1=1" class="btn @if($ck1==1) btn-warning @else btn-default @endif btn-xs">Abertos</a>
+                                                              </label>
+
+                                                              <label> 
+                                                                <a href="{{route('home')}}?op2=1" class="btn @if($ck2==1) btn-warning @else btn-default @endif  btn-xs">Fechados</a>
+                                                              </label>
+
+                                                              <label>
+                                                                  <a href="{{route('home')}}?op3=1" class="btn @if($ck3==1) btn-warning @else btn-default @endif btn-xs">Cancelados</a>
+                                                              </label>
+
+                                                              <label>
+                                                                   @if(Auth::user()->isinrule(['master']))
+
+                                                                           <button type="button" class="btn btn-sm btn-info  btn-xs" data-toggle="modal" data-target="#exampleModal">
+                                                                                          Inserir Novo Jogo
+                                                                           </button>
+
+                                                                    @endif
+                                                              </label>
+                                                          </p>
+                                                   </div>
+                                            </li>
+                                    </ul>
+
+                                </div>
+                              </div>
                                 <div class="box">
             
                                   <div class="box-header">
-                                   <div class=" col-lg-1"><button class="btn btn-default btn-sm" id="btnfilterjogos"><i class="fa fa-filter"></i> </button> </div>  <div class=" col-lg-2">
+                                  <div class=" col-lg-5">
                                  <ul class="control-sidebar-menu">
                                     <li>
                                       <div class="input-group">
-
+                                         <span class="input-group-btn">
+                                             <button class="btn btn-default btn-sm" id="btnfilterjogos"><i class="fa fa-filter"></i> </button> 
+                                        </span>
                                          <span class="input-group-btn">
                                           <form action="{{route('home.data')}}" method="post">
                                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -153,9 +169,9 @@
 
                                               <tr><td colspan="3" class="text-cente {{ $item->classaposta }}" >
                                                       <div class="col-xs-10">
-                                                         
-                                                                {!! $item->vencedor !!}
-                                                                
+                                                             <div class="col-xs-6">
+                                                                 {!! $item->vencedor !!}
+                                                             </div>
                                                              @if($item->situacao == 0 && $item->cancelado == 0)
                                                                 @if(Auth::user()->isinrule(['master']))
                                                                 <div class="col-xs-2" id="fec{{ $item->id }}">
@@ -179,7 +195,7 @@
                                                   <tr>
 
                                                     <td class="col-xs-2  text-right">
-                                                      
+                                                        
                                                         @if($item->_aposta == "1")
 
                                                           <button type="button" idjogo="{{ $item->id }}" app="1"  class="btn btn-success btn-sm apptmp">{{ $item->eq1 }}   </button>
@@ -212,6 +228,9 @@
                                         </table>
                                   </div>
                                 </div>
+                                </div>
+                          <div class="col-lg-3">
+                          </div>
                         </div>
                       </div>
                   </div>

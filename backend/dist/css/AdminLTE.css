@@ -4967,4 +4967,51 @@ table.text-center th {
   .table-responsive > .table tr td {
     white-space: normal !important;
   }
+    @media (max-width: 830px) {
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+.apptmp{
+  width: 100%;
+}
+.apptmp2{
+  width: 100%;
+}
+
+
+.three-inline-buttons .button {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.three-inline-buttons {
+     display: table;
+     margin: 0 auto;
+}
+
+@media only screen and (max-width: 960px) {
+
+    .three-inline-buttons .button{
+        width: 100%;
+        margin: 20px;
+        text-align: center;
+    }
+    
+}
+table#mytable,
+table#mytable td
+{
+    border: none !important;
+    padding:4px; 
+    border-width:0px; 
+    margin:0px; 
+}
+table#mytable {
+border:0px;
+border-collapse:collapse;
+border-spacing:0px;
+}
+
 }

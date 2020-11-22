@@ -112,8 +112,13 @@ class ArticleController extends Controller
 
        $selcat = Categoriablog::getCatBlog();
 
+       $campains = Newslettermailchimp::getLists();
+
+
+       $campains = $campains['lists'];
+
          if($article->save()){
-             return view('backend.Articles.edit', compact('article','selcat'));
+             return view('backend.Articles.edit', compact('article','selcat','campains'));
             //return new ArticleResource($art);
          }
     }
@@ -291,6 +296,7 @@ class ArticleController extends Controller
              // dd("entrou2");
           $emailtmp = view('backend.Emails.emailchimp',compact('article'))->render();
 
+         // dd($emailtmp);
 
           $retorno = Newslettermailchimp::createCampaign('3 Velhos',"3velhos@gmail.com", $article->title, $request->emailsend ,$emailtmp, $article->body, "3velhos.pt/login");
 
