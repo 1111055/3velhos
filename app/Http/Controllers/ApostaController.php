@@ -119,6 +119,10 @@ class ApostaController extends Controller
 
             $horajogo = $this->convert12to24($splitNametwo[0]);
         }
+         if($splitName[1] == "AM" &&  $horajogo == 12){
+
+                 $horajogo = 00;
+         }
         
 
         if($year < $yearjogo){
@@ -208,7 +212,7 @@ class ApostaController extends Controller
             $conversao = 23;
               break;
            case 12:
-            $conversao = 24;
+            $conversao = 12;
               break;
           default:
               $hora;

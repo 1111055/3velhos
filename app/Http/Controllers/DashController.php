@@ -181,6 +181,19 @@ class DashController extends Controller
                 $testetmp = str_replace("AM",' ', $value->hora);
             }
 
+         if($splitName[1] == "AM" &&  $horajogo == 12){
+
+           
+
+               
+                $horajogotmp = "00";
+                $teste = str_replace($horajogo,$horajogotmp, $value->hora);
+                $testetmp = str_replace("AM",' ', $teste);
+
+         }
+
+        //  dd($horajogo);
+
 
             $value->hora = $testetmp;
 
@@ -353,7 +366,13 @@ class DashController extends Controller
                 $testetmp = str_replace("AM",' ', $value->hora);
             }
 
+       if($splitName[1] == "AM" &&  $horajogo == 12){
 
+               
+                $horajogotmp = "00";
+                $teste = str_replace($horajogo,$horajogotmp, $value->hora);
+                $testetmp = str_replace("AM",' ', $teste);
+         }
             $value->hora = $testetmp;
                    
          }    
@@ -410,7 +429,7 @@ class DashController extends Controller
             $conversao = 23;
               break;
            case 12:
-            $conversao = 24;
+            $conversao = 12;
               break;
           default:
               $hora;
