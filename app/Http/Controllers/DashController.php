@@ -128,7 +128,7 @@ class DashController extends Controller
                       $result = "Terminado, vencedor: ".$value->eq2;
                  }
 
-                 if($value->resultado != 0){
+                 if($value->resultado != "0"){
 
                          if($exist->aposta == $value->resultado){
                                    $value['classaposta'] = "success";
@@ -305,6 +305,7 @@ class DashController extends Controller
             $exist = Aposta::where('user_id','=',$userId)->where('jogo_id', '=', $value->id)->first();
 
              $value['classaposta'] = "default";
+
             if($exist != null){
                //  dd($exist);
                  $value['_aposta'] = $exist->aposta;
@@ -318,7 +319,7 @@ class DashController extends Controller
                       $result = "Terminado, vencedor: ".$value->eq2;
                  }
 
-                if($value->resultado != 0){
+                if($value->resultado != "0"){
                              if($exist->aposta == $value->resultado){
                                        $value['classaposta'] = "success";
                                        $value['vencedor']    =  "<span class='label label-default'>".$result."</span> <i class='fa fa-thumbs-up'></i>";
