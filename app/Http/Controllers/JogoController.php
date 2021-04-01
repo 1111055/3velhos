@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Jogo;
-use App\User;
 use App\Aposta;
 use App\Classificacao;
 use App\Article;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 
 
@@ -269,9 +267,6 @@ class JogoController extends Controller
          }
 
          $bet->save();
-       
-       $now = Carbon::now();
-       $mes = $now->month;
 
 
          $vit = $bet->resultado == "1" ? "Jogo: ".$bet->eq1." x ".$bet->eq2." vitória do ".$bet->eq1 : "vitória do ".$bet->eq2;
@@ -279,8 +274,9 @@ class JogoController extends Controller
          if($bet->resultado == "x"){
                  $vit = "O jogo ".$bet->eq1." x ".$bet->eq2." acabou empatado.";
          }
-          $users_tmp = User::where('activo', '=','1')->pluck('ID')->all();
-          $class = Classificacao::whereIn('user_id', $users_tmp)->orderBy('pontos','desc')->get();
+
+          $class = Classificacao:: 
+                 orderBy('pontos','desc')->get();
 
           $totalap = Aposta::where('aposta', '=', $bet->resultado)->where('jogo_id', '=', $id)->get();
 
@@ -291,29 +287,11 @@ class JogoController extends Controller
 
           $html1 =   "<table class='table'>
                       <tbody>";
-                foreach ($class as $key => $value) {
-
-
-                      $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
-                      $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
-                   
-
-
-                      if($teste > 0){
-                          $perc = ($teste2 * 100) / $teste;
-                      }
-                      else{
-                           $perc = 0;
-                      }
-
-                     $teste_tmp2 = $teste2."/".$teste." (".(int)$perc."%)";
-
-
-
-                       $html1 =  $html1."<tr>
-                                  <td>".$value->utilizador[0]->name."</td><td>".   $teste_tmp2."</td>
-                                </tr>";
-                }
+                        foreach ($class as $key => $value) {
+                               $html1 =  $html1."<tr>
+                                          <td>".$value->utilizador[0]->name."</td><td>".$value->pontos."</td>
+                                        </tr>";
+                        }
                        
             $html1 = $html1."</tbody></table>";
 
