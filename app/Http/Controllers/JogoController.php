@@ -271,7 +271,10 @@ class JogoController extends Controller
          $bet->save();
        
        $now = Carbon::now();
-       $mes = $now->month;
+      // $mes = $now->month;
+         $mes = 7;
+         $ano = $now->year;
+
 
 
          $vit = $bet->resultado == "1" ? "Jogo: ".$bet->eq1." x ".$bet->eq2." vitória do ".$bet->eq1 : "vitória do ".$bet->eq2;
@@ -294,8 +297,13 @@ class JogoController extends Controller
                 foreach ($class as $key => $value) {
 
 
-                      $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
-                      $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
+                     // $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
+                     // $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
+
+
+                      $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '>=', $mes)->whereYear('created_at', '>=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
+                      $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '>=', $mes)->whereYear('created_at', '>=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
+
                    
 
 

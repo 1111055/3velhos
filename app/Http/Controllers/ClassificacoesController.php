@@ -42,8 +42,9 @@ class ClassificacoesController extends Controller
 
        
        $now = Carbon::now();
-       $mes = $now->month;
-
+       //$mes = $now->month;
+       $mes = 6;
+       $ano = $now->year;
 
        $users_tmp = User::where('activo', '=','1')->pluck('ID')->all();
       /*  if($idgrupo == -1){
@@ -91,8 +92,15 @@ class ClassificacoesController extends Controller
            
 
 
-            $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
-            $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
+           // $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
+           // $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
+
+            $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '>=', $mes)->whereYear('created_at', '>=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
+            $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '>=', $mes)->whereYear('created_at', '>=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
+
+ 
+            $teste3 = DB::table('resutladosestatisticas')->whereYear('created_at', '=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
+            $teste4 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereYear('created_at', '=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
          
 
 
@@ -106,9 +114,35 @@ class ClassificacoesController extends Controller
             }
 
             $value['percentagens'] = $teste2."/".$teste." (".(int)$perc."%)";
+            $value['valor_tmp'] = $teste2;
+            $value['perc_tmp'] = $perc;
+
+
+            if($teste3 > 0){
+                $percano = ($teste4 * 100) / $teste3;
+            }
+            else{
+                 $percano = 0;
+            }
+
+            $value['percentagensano'] = $teste4."/".$teste3." (".(int)$percano."%)";
+            $value['valor_tmp_ano'] = $teste4;
+            $value['perc_tmp_ano'] = $percano;
+
 
 
         }         
+
+
+       /* $class = $class->sort(function($a, $b) {
+               if($a->valor_tmp === $b->valor_tmp) {
+                 if($a->perc_tmp === $b->perc_tmp) {
+                   return 0;
+                 }
+                 return $a->valor_tmp > $b->valor_tmp ? -1 : 1;
+               } 
+               return $a->perc_tmp > $b->perc_tmp ? -1 : 1;
+            });*/
 
        return response()->json($class);
 

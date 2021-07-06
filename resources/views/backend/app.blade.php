@@ -317,9 +317,9 @@ function classificacoes(id){
           .done(function( data ) {
 
             data.forEach(function(entry) {
-             console.log(entry);
+           
 
-             var html =  "<li class='item'><div class='product-info'><a href='javascript:void(0)' class='product-title'>"+ entry['nome'] +"<span class='label label-default pull-right'>"+ entry['percentagens'] +"</span></a></div></li>";
+             var html =  "<li class='item'><div class='product-info'><a href='javascript:void(0)' class='product-title'>"+ entry['nome'] +"<span class='label label-default pull-right'>"+ entry['percentagens'] +"</span><span class='label label-default pull-right'>"+ entry['percentagensano'] +"</span></a></div></li>";
 
              $( "#classifica" ).append(html);
             });
@@ -334,7 +334,7 @@ function jogos(id){
           .done(function( data ) {
 
             data.forEach(function(entry) {
-             console.log(entry);
+            
 
              var html =  "<li class='item'><div class='product-info'><a href='javascript:void(0)' class='product-title'>"+ entry['nome'] +"<span class='label label-success pull-right'>"+ entry['pontos'] +"</span></a></div></li>";
 
