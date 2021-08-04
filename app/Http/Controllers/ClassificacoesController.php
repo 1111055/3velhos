@@ -36,115 +36,18 @@ class ClassificacoesController extends Controller
 
     public function getall(Request $request)
     {
-       $idgrupo =  request()->id;
-       $user = Auth::user();
-       $todos = false;
-
-       
-       $now = Carbon::now();
-       //$mes = $now->month;
-       $mes = 6;
-       $ano = $now->year;
-
-       $users_tmp = User::where('activo', '=','1')->pluck('ID')->all();
-      /*  if($idgrupo == -1){
-            $todos = true;
-        }elseif($idgrupo == 0){
-           $grupo  = Usergrupo::where('user_id', '=',$user->id)->first();
-        }else{
-           $grupo  = Usergrupo::where('user_id', '=',$user->id)->where('grupo_id','=',$idgrupo)->first();
-        }
-
-       if($idgrupo != -1){
-           $grupoallusers = Usergrupo::where('grupo_id', '=',$grupo->grupo_id)->pluck('user_id')->toArray();
-        }
-
-    
-       
-        $teste_tmp = array_intersect(  $grupoallusers,  $users_tmp);
-    
-        if($todos == false){
-
-           
-             $apostastmp = Aposta::whereMonth('created_at', '=', $mes) ;
-
-        //     dd($apostastmp);  
-
-            $class = Classificacao::whereIn('user_id', $teste_tmp)-> 
-                     orderBy('pontos','desc')->get();
-        }else{
-
-
-               $class = Classificacao::whereIn('user_id', $users_tmp)-> 
-                     orderBy('pontos','desc')->get();
-
-        }*/
-         $class = Classificacao::whereIn('user_id', $users_tmp)-> 
-                     orderBy('pontos','desc')->get();
-       //  dd($class);
-
-
-
+        $now = Carbon::now();
      
-        foreach ($class as $key => $value) {
-              
+       $mes = 8;
 
-           
-
-
-           // $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
-           // $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
-
-            $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '>=', $mes)->whereYear('created_at', '>=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
-            $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '>=', $mes)->whereYear('created_at', '>=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
-
- 
-            $teste3 = DB::table('resutladosestatisticas')->whereYear('created_at', '=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
-            $teste4 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereYear('created_at', '=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
-         
+       $ano = 2021;
 
 
-           $value['nome'] = $value->utilizador[0]->name;
-
-            if($teste > 0){
-                $perc = ($teste2 * 100) / $teste;
-            }
-            else{
-                 $perc = 0;
-            }
-
-            $value['percentagens'] = $teste2."/".$teste." (".(int)$perc."%)";
-            $value['valor_tmp'] = $teste2;
-            $value['perc_tmp'] = $perc;
+        $teste2tmp = DB::select("select res.user_id,us.name ,SUM(case when result=1 then 1 else 0 end) as totalacerto,COUNT(*) AS totalapos,ROUND((SUM(case when result=1 then 1 else 0 END) /COUNT(*))*100,2) AS media FROM resutladosestatisticas res JOIN users us ON us.id = res.user_id WHERE YEAR(res.created_at)='".$ano."'and MONTH(res.created_at)>='".$mes."' and DAY(res.created_at)>=1 GROUP BY res.user_id,us.name ORDER BY SUM(case when result=1 then 1 else 0 END) desc,  ROUND((SUM(case when result=1 then 1 else 0 END) /COUNT(*))*100,2) desc");
 
 
-            if($teste3 > 0){
-                $percano = ($teste4 * 100) / $teste3;
-            }
-            else{
-                 $percano = 0;
-            }
+       return response()->json($teste2tmp);
 
-            $value['percentagensano'] = $teste4."/".$teste3." (".(int)$percano."%)";
-            $value['valor_tmp_ano'] = $teste4;
-            $value['perc_tmp_ano'] = $percano;
-
-
-
-        }         
-
-
-       /* $class = $class->sort(function($a, $b) {
-               if($a->valor_tmp === $b->valor_tmp) {
-                 if($a->perc_tmp === $b->perc_tmp) {
-                   return 0;
-                 }
-                 return $a->valor_tmp > $b->valor_tmp ? -1 : 1;
-               } 
-               return $a->perc_tmp > $b->perc_tmp ? -1 : 1;
-            });*/
-
-       return response()->json($class);
 
     }
 

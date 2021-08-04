@@ -271,9 +271,8 @@ class JogoController extends Controller
          $bet->save();
        
        $now = Carbon::now();
-      // $mes = $now->month;
-         $mes = 7;
-         $ano = $now->year;
+         $mes = 8;
+         $ano = 2021;
 
 
 
@@ -283,9 +282,14 @@ class JogoController extends Controller
                  $vit = "O jogo ".$bet->eq1." x ".$bet->eq2." acabou empatado.";
          }
           $users_tmp = User::where('activo', '=','1')->pluck('ID')->all();
-          $class = Classificacao::whereIn('user_id', $users_tmp)->orderBy('pontos','desc')->get();
+        //  $class = Classificacao::whereIn('user_id', $users_tmp)->orderBy('pontos','desc')->get();
 
           $totalap = Aposta::where('aposta', '=', $bet->resultado)->where('jogo_id', '=', $id)->get();
+
+
+        $teste2tmp = DB::select("select res.user_id,us.name ,SUM(case when result=1 then 1 else 0 end) as totalacerto,COUNT(*) AS totalapos,ROUND((SUM(case when result=1 then 1 else 0 END) /COUNT(*))*100,2) AS media FROM resutladosestatisticas res JOIN users us ON us.id = res.user_id WHERE YEAR(res.created_at)='".$ano."'and MONTH(res.created_at)>='".$mes."' and DAY(res.created_at)>=1 GROUP BY res.user_id,us.name ORDER BY SUM(case when result=1 then 1 else 0 END) desc,  ROUND((SUM(case when result=1 then 1 else 0 END) /COUNT(*))*100,2) desc");
+
+
 
           $html = count($totalap)." Pessoas acertaram no jogo ". $bet->eq1." x ".$bet->eq2." neste resultado.<br/><br/>";
 
@@ -294,32 +298,14 @@ class JogoController extends Controller
 
           $html1 =   "<table class='table'>
                       <tbody>";
-                foreach ($class as $key => $value) {
+                foreach ($teste2tmp as $key => $value) {
 
 
-                     // $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
-                     // $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '=', $mes)->where('user_id','=', $value->utilizador[0]->id)->count();
 
-
-                      $teste = DB::table('resutladosestatisticas')->whereMonth('created_at', '>=', $mes)->whereYear('created_at', '>=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
-                      $teste2 = DB::table('resutladosestatisticas')->where('result', '=', 1)->whereMonth('created_at', '>=', $mes)->whereYear('created_at', '>=', $ano)->where('user_id','=', $value->utilizador[0]->id)->count();
-
-                   
-
-
-                      if($teste > 0){
-                          $perc = ($teste2 * 100) / $teste;
-                      }
-                      else{
-                           $perc = 0;
-                      }
-
-                     $teste_tmp2 = $teste2."/".$teste." (".(int)$perc."%)";
-
-
+                     $teste_tmp2 = $value->totalacerto."/".$value->totalapos." (".$value->media."%)";
 
                        $html1 =  $html1."<tr>
-                                  <td>".$value->utilizador[0]->name."</td><td>".   $teste_tmp2."</td>
+                                  <td>".$value->name."</td><td>".   $teste_tmp2."</td>
                                 </tr>";
                 }
                        

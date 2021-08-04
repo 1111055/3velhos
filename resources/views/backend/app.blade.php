@@ -313,13 +313,14 @@ $('.fechar').on('click', function(){
 
 function classificacoes(id){
         jQuery('#classifica').html('');
-        $.get("{{ route('classificacao.getall') }}?id="+id)
+        $.get("https://api3velhos.herokuapp.com/public/api/classificacao/getall")
           .done(function( data ) {
 
+            console.log(data);
             data.forEach(function(entry) {
            
 
-             var html =  "<li class='item'><div class='product-info'><a href='javascript:void(0)' class='product-title'>"+ entry['nome'] +"<span class='label label-default pull-right'>"+ entry['percentagens'] +"</span><span class='label label-default pull-right'>"+ entry['percentagensano'] +"</span></a></div></li>";
+             var html =  "<li class='item'><div class='product-info'><a href='javascript:void(0)' class='product-title'>"+ entry['name'] +"<span class='label label-default pull-right'>" + entry['media'] + " %</span><span class='label label-default pull-right'>"+ entry['totalacerto'] + "/" + entry['totalapos'] +"</span></a></div></li>";
 
              $( "#classifica" ).append(html);
             });
